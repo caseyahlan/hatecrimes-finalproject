@@ -1,7 +1,7 @@
 # Project Description
 *What is the overarching purpose of your research project, and why is it an important undertaking?*
 
-The purpose of the research project is to investigate hate crimes data to better understand relationships between an area’s demographics and socioeconomic levels and incidence of hate crimes. It is an important undertaking because better understanding this data would help us in acknowledging the current trends and common motivations behind hate crimes. Using insights from our analyses, we can then predict hate crime rates based on the appropriate socioeconomic factors.
+- The purpose of the research project is to investigate hate crimes data to better understand relationships between an area’s demographics and socioeconomic levels and incidence of hate crimes. It is an important undertaking because better understanding this data would help us in acknowledging the current trends and common motivations behind hate crimes. Using insights from our analyses, we can then predict hate crime rates based on the appropriate socioeconomic factors.
 
 *How does your research fit into the broader problem domain? You should cite at least 3 papers that help contextualize your research.*
 
@@ -21,17 +21,17 @@ To test which socioeconomic features are most correlated with hate crimes we wil
 
 *What are the datasets you'll be working with to answer this question? Please include relevant background describing the datasets you identify.*
 
-[Hate crime data](https://ucr.fbi.gov/hate-crime/2016?fbclid=IwAR1XrwBRWJ40IyGjTS5iVbL6BGAhZEr3mCFthpispOog7p4zMfIGSL0jGy0) from the FBI that includes data about hate crime incidents, including motivations, victims, offenders, locations, and rates by jurisdiction. The source of their data is Uniform Crime Reporting from local governments.
+- [Hate crime data](https://ucr.fbi.gov/hate-crime/2016?fbclid=IwAR1XrwBRWJ40IyGjTS5iVbL6BGAhZEr3mCFthpispOog7p4zMfIGSL0jGy0) from the FBI that includes data about hate crime incidents, including motivations, victims, offenders, locations, and rates by jurisdiction. The source of their data is Uniform Crime Reporting from local governments.
 
-[Hate crime data](https://github.com/fivethirtyeight/data/tree/master/hate-crimes?fbclid=IwAR0QCVEZ251T-gjpKoidETkvmS3ohND_Wk21TmlD_vg7mdNNgRXJLkwQRpY) from fivethirtyeight, which includes hate crime rates, as well as other demographic data such as median household income, rate of non white residents, rate of voters who voted for Trump, and more. The sources of their data are the Kaiser Family Foundation, the Census Bureau, the United States Elections Project, the Southern Poverty Law Center, and the FBI.
+- [Hate crime data](https://github.com/fivethirtyeight/data/tree/master/hate-crimes?fbclid=IwAR0QCVEZ251T-gjpKoidETkvmS3ohND_Wk21TmlD_vg7mdNNgRXJLkwQRpY) from fivethirtyeight, which includes hate crime rates, as well as other demographic data such as median household income, rate of non white residents, rate of voters who voted for Trump, and more. The sources of their data are the Kaiser Family Foundation, the Census Bureau, the United States Elections Project, the Southern Poverty Law Center, and the FBI.
 
 *What statistical and machine learning methods do you plan on using to test your hypothesis?*
 - Multivariate linear regression to test the correlation between crime rates and our socioeconomic variables of interest, which includes gini index, median household income, proportion of non-white population, and the proportion of unemployed individuals.
 
 *Who is your target audience for the resource you will build? Depending on the domain of your data, there may be a variety of audiences interested in using the dataset. You should hone in on one of these audiences.*
 
-_Target Audience_: Law enforcement/government - to better understand some of the trends and motivations behind hate crimes that are happening in the country. States that have high hate crime rates can improve training for law enforcement officers to better handle these situations
-_Secondary Audience_: Communities - all people can use this resource to better understand what is happening in their community and can work to improve their communities through advocacy and education
+- _Target Audience_: Law enforcement/government - to better understand some of the trends and motivations behind hate crimes that are happening in the country. States that have high hate crime rates can improve training for law enforcement officers to better handle these situations
+- _Secondary Audience_: Communities - all people can use this resource to better understand what is happening in their community and can work to improve their communities through advocacy and education
 
 *What should your audience learn from your resource?
 Consider specific questions they may want to answer.*
