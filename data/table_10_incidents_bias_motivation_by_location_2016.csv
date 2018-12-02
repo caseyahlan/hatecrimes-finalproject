@@ -1,13 +1,5 @@
-﻿Location,"Total
-incidents",Bias motivation,,,,,,"Multiple-
-bias
-incidents1",,,,
-,,"Race/
-Ethnicity/
-Ancestry",Religion,"Sexual
-orientation",Disability,Gender,"Gender
-Identity",,,,,
-Total,"6,121","3,489","1,273","1,076",70,31,124,58,,,,
+Location,Total incidents,Race/Ethnicity/Ancestry,Religion,Sexual orientation,Disability,Gender,Gender Identity,Multiple-bias incidents,,,,
+Total,6121,3489,1273,1076,70,31,124,58,,,,
 Abandoned/condemned structure,5,2,3,0,0,0,0,0,,,,
 Air/bus/train terminal,94,60,11,16,2,0,2,3,,,,
 Amusement park,1,0,0,1,0,0,0,0,,,,
@@ -32,7 +24,7 @@ Field/woods,31,19,7,2,0,0,3,0,,,,
 Gambling facility/casino/race track,3,3,0,0,0,0,0,0,,,,
 Government/public building,111,73,24,10,1,2,0,1,,,,
 Grocery/supermarket,62,46,7,8,0,0,1,0,,,,
-Highway/road/alley/street/sidewalk,"1,128",718,117,241,7,1,35,9,,,,
+Highway/road/alley/street/sidewalk,1128,718,117,241,7,1,35,9,,,,
 Hotel/motel/etc.,44,32,3,8,0,0,1,0,,,,
 Industrial site,12,10,1,1,0,0,0,0,,,,
 Jail/prison/penitentiary/corrections facility,61,42,3,13,1,1,0,1,,,,
@@ -42,14 +34,14 @@ Military installation,0,0,0,0,0,0,0,0,,,,
 Park/playground,98,66,13,12,2,1,2,2,,,,
 Parking/drop lot/garage,351,222,50,68,3,0,5,3,,,,
 Rental storage facility,9,5,3,0,0,0,1,0,,,,
-Residence/home,"1,670","1,008",249,327,32,11,24,19,,,,
+Residence/home,1670,1008,249,327,32,11,24,19,,,,
 Rest area,4,3,0,1,0,0,0,0,,,,
 Restaurant,143,92,14,29,3,2,3,0,,,,
 School/college2,146,67,52,24,0,1,0,2,,,,
-School—college/university,210,107,61,36,1,0,5,0,,,,
-School—elementary/secondary,248,155,48,29,6,1,2,7,,,,
+School?college/university,210,107,61,36,1,0,5,0,,,,
+School?elementary/secondary,248,155,48,29,6,1,2,7,,,,
 Service/gas station,72,55,8,6,0,0,3,0,,,,
-Shelter—mission/homeless,16,10,2,2,0,0,2,0,,,,
+Shelter?mission/homeless,16,10,2,2,0,0,2,0,,,,
 Shopping mall,8,6,2,0,0,0,0,0,,,,
 "Specialty store (TV, fur, etc.)",39,28,9,2,0,0,0,0,,,,
 Other/unknown,777,297,301,132,7,8,27,5,,,,
