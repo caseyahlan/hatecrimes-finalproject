@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head><meta charset="utf-8" />
-<title>conclusion</title><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
+<title>datatables</title><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
 
 <style type="text/css">
@@ -11800,7 +11800,7 @@ div#notebook {
 <span class="s1">    $(&#39;div.input&#39;).hide()</span>
 <span class="s1">  });</span>
 <span class="s1">&lt;/script&gt;</span>
-<span class="s1">&#39;&#39;&#39;</span><span class="p">)</span>
+<span class="s1">&lt;form action=&quot;javascript:code_toggle()&quot;&gt;&lt;input type=&quot;submit&quot; id=&quot;toggleButton&quot; value=&quot;Show Code&quot;&gt;&lt;/form&gt;&#39;&#39;&#39;</span><span class="p">)</span>
 </pre></div>
 
 </div>
@@ -11841,7 +11841,7 @@ div#notebook {
     $('div.input').hide()
   });
 </script>
-
+<form action="javascript:code_toggle()"><input type="submit" id="toggleButton" value="Show Code"></form>
 </div>
 
 </div>
@@ -11854,14 +11854,5131 @@ div#notebook {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><a href="index.html">Problem Overview</a> | <a href="analysis.html">Exploratory Data Analysis</a> | <a href="modeling_analysis.html">Modeling Analysis</a> | Conclusion</p>
-<h1 id="Conclusion">Conclusion<a class="anchor-link" href="#Conclusion">&#182;</a></h1><p>After exploring and analyzing the hate crime datasets from fivethirtyeight and the FBI, we are still left with questions and concerns about this topic. Throughout our research of the project domain, we discovered many inconsistencies in the way states collect data about hate crimes. For example, Hawaii does not use police departments or sheriffs' offices to submit hate crime data to the FBI. Instead, the attorney general's office is responsible for keeping a running tally. There is also evidence that hate crimes are vastly underreported across the country. Whether for fear of retaliation or law enforcement officers not taking these incidents seriously, individuals are not reporting hate crimes and institutions are not consistently addressing hate crimes. In addition, there is no standard way to define a hate crime, which means similar or identical crimes are being reported as hate crimes in some cases, and not in other cases. All of these inconsistencies in the way hate crime data is collected affect our ability to make significant conclusions about the impact of hate crimes in the United States as well as our ability to predict rates of hate crimes in the future.</p>
-<p>Despite these inconsistencies, there are important messages to be gained from this analysis. The large majority of hate crimes in these datasets show Anti Black or African American motivations, which demonstrates the continued effects and ramifications of individualized and institutionalized racism in the United States. We found that features related to income tended to correlate most to high rates of hate crimes. These findings show how income inequality affects communities and individual lives. District of Columbia reports the both the highest number of hate crimes per 100k people as well as the highest Gini index. It is also important to note that District of Columbia has the smallest population across the United States and only one main police department, which are factors that likely contribute to the high rates of hate crimes in this district. These outliers are important to note, but there is also significant context to uncover behind the reasoning for these outcomes.</p>
-<p>New data about hate crimes is collected every year, and this project can continue to expand with these new findings. It would be especially interesting to look into historical factors that contribute to a rise in hate crimes. There is also not enough collective information about how hate crimes are reported differently from one state to another. Additional work needs to be done to undertand how these factors contribute to the number of hate crimes. Doing more work predicting hate crimes using machine learning methods would help us understand how we can look forward and better understand what contributes to high rates of hate crimes in the United States</p>
-<p>This project provides some insight into how hate crimes affect individuals and communities in the United States, but there is still significant work to be done related to this topic. Training of law enforcement and education of communities is a start. That said, hate crimes will not stop unless there is a shift in the way of thinking in the United States. Racism, homophobia, xenophobia, sexism, and economic inequality, among other factors, show up in different ways in the daily lives of every person in the United States. Until these issues are addressed, hate crimes will continue.</p>
+<h1 id="Data-tables">Data tables<a class="anchor-link" href="#Data-tables">&#182;</a></h1><h3 id="Below-are-the-data-tables-we-consulted-in-our-analysis.-(after-data-preparation)">Below are the data tables we consulted in our analysis. (after data preparation)<a class="anchor-link" href="#Below-are-the-data-tables-we-consulted-in-our-analysis.-(after-data-preparation)">&#182;</a></h3><p><a href="analysis.ipynb">Return to analysis</a></p>
 
 </div>
 </div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[2]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+
+<span class="n">data_538</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;./data/hate_crimes.csv&quot;</span><span class="p">)</span>
+<span class="n">off_by_bias_motivation</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;./data/table_1_incidents_offenses_victims_and_known_offenders_by_bias_motivation_2016.csv&quot;</span><span class="p">)</span>
+<span class="n">off_by_off_type</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;./data/table_2_incidents_offenses_victims_and_known_offenders_by_offense_type_2016.csv&quot;</span><span class="p">)</span>
+<span class="n">off_race_by_off_type</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;./data/table_3_offenses_known_offenders_race_and_ethnicity_by_offense_type_2016.csv&quot;</span><span class="p">)</span>
+<span class="n">off_type_by_bias_motivation</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;./data/table_4_offenses_offense_type_by_bias_motivation_2016.csv&quot;</span><span class="p">)</span>
+<span class="n">off_race_by_bias_motivation</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;./data/table_5_offenses_known_offenders_race_and_ethnicity_by_bias_motivation_2016.csv&quot;</span><span class="p">)</span>
+<span class="n">off_by_state</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;./data/table_11_offenses_offense_type_by_participating_state_2016.csv&quot;</span><span class="p">)</span>
+<span class="n">locations</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;./data/table_10_incidents_bias_motivation_by_location_2016.csv&quot;</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Hate-Crimes-data-from-538">Hate Crimes data from 538<a class="anchor-link" href="#Hate-Crimes-data-from-538">&#182;</a></h2><p>Shows demographic and hate crime data from each state.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[3]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">data_538</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[3]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>code</th>
+      <th>state</th>
+      <th>median_household_income</th>
+      <th>share_unemployed_seasonal</th>
+      <th>share_population_in_metro_areas</th>
+      <th>share_population_with_high_school_degree</th>
+      <th>share_non_citizen</th>
+      <th>share_white_poverty</th>
+      <th>share_white_poverty.1</th>
+      <th>share_white_poverty.2</th>
+      <th>share_voters_voted_trump</th>
+      <th>hate_crimes_per_100k_splc</th>
+      <th>avg_hatecrimes_per_100k_fbi</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>AL</td>
+      <td>Alabama</td>
+      <td>42278</td>
+      <td>0.060</td>
+      <td>0.64</td>
+      <td>0.821</td>
+      <td>0.02</td>
+      <td>0.12</td>
+      <td>1.12</td>
+      <td>2.12</td>
+      <td>0.63</td>
+      <td>0.125839</td>
+      <td>1.806410</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>AK</td>
+      <td>Alaska</td>
+      <td>67629</td>
+      <td>0.064</td>
+      <td>0.63</td>
+      <td>0.914</td>
+      <td>0.04</td>
+      <td>0.06</td>
+      <td>1.06</td>
+      <td>2.06</td>
+      <td>0.53</td>
+      <td>0.143740</td>
+      <td>1.656700</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>AZ</td>
+      <td>Arizona</td>
+      <td>49254</td>
+      <td>0.063</td>
+      <td>0.90</td>
+      <td>0.842</td>
+      <td>0.10</td>
+      <td>0.09</td>
+      <td>1.09</td>
+      <td>2.09</td>
+      <td>0.50</td>
+      <td>0.225320</td>
+      <td>3.413928</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>AR</td>
+      <td>Arkansas</td>
+      <td>44922</td>
+      <td>0.052</td>
+      <td>0.69</td>
+      <td>0.824</td>
+      <td>0.04</td>
+      <td>0.12</td>
+      <td>1.12</td>
+      <td>2.12</td>
+      <td>0.60</td>
+      <td>0.069061</td>
+      <td>0.869209</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>CA</td>
+      <td>California</td>
+      <td>60487</td>
+      <td>0.059</td>
+      <td>0.97</td>
+      <td>0.806</td>
+      <td>0.13</td>
+      <td>0.09</td>
+      <td>1.09</td>
+      <td>2.09</td>
+      <td>0.33</td>
+      <td>0.255805</td>
+      <td>2.397986</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>CO</td>
+      <td>Colorado</td>
+      <td>60940</td>
+      <td>0.040</td>
+      <td>0.80</td>
+      <td>0.893</td>
+      <td>0.06</td>
+      <td>0.07</td>
+      <td>1.07</td>
+      <td>2.07</td>
+      <td>0.44</td>
+      <td>0.390523</td>
+      <td>2.804689</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>CT</td>
+      <td>Connecticut</td>
+      <td>70161</td>
+      <td>0.052</td>
+      <td>0.94</td>
+      <td>0.886</td>
+      <td>0.06</td>
+      <td>0.06</td>
+      <td>1.06</td>
+      <td>2.06</td>
+      <td>0.41</td>
+      <td>0.335392</td>
+      <td>3.772701</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>DE</td>
+      <td>Delaware</td>
+      <td>57522</td>
+      <td>0.049</td>
+      <td>0.90</td>
+      <td>0.874</td>
+      <td>0.05</td>
+      <td>0.08</td>
+      <td>1.08</td>
+      <td>2.08</td>
+      <td>0.42</td>
+      <td>0.322754</td>
+      <td>1.469980</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>DC</td>
+      <td>District of Columbia</td>
+      <td>68277</td>
+      <td>0.067</td>
+      <td>1.00</td>
+      <td>0.871</td>
+      <td>0.11</td>
+      <td>0.04</td>
+      <td>1.04</td>
+      <td>2.04</td>
+      <td>0.04</td>
+      <td>1.522302</td>
+      <td>10.953480</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>FL</td>
+      <td>Florida</td>
+      <td>46140</td>
+      <td>0.052</td>
+      <td>0.96</td>
+      <td>0.853</td>
+      <td>0.09</td>
+      <td>0.11</td>
+      <td>1.11</td>
+      <td>2.11</td>
+      <td>0.49</td>
+      <td>0.187521</td>
+      <td>0.698070</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>GA</td>
+      <td>Georgia</td>
+      <td>49555</td>
+      <td>0.058</td>
+      <td>0.82</td>
+      <td>0.839</td>
+      <td>0.08</td>
+      <td>0.09</td>
+      <td>1.09</td>
+      <td>2.09</td>
+      <td>0.51</td>
+      <td>0.120420</td>
+      <td>0.412012</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>HI</td>
+      <td>Hawaii</td>
+      <td>71223</td>
+      <td>0.034</td>
+      <td>0.76</td>
+      <td>0.904</td>
+      <td>0.08</td>
+      <td>0.07</td>
+      <td>1.07</td>
+      <td>2.07</td>
+      <td>0.30</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>ID</td>
+      <td>Idaho</td>
+      <td>53438</td>
+      <td>0.042</td>
+      <td>0.70</td>
+      <td>0.884</td>
+      <td>0.04</td>
+      <td>0.11</td>
+      <td>1.11</td>
+      <td>2.11</td>
+      <td>0.59</td>
+      <td>0.124208</td>
+      <td>1.891331</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>IL</td>
+      <td>Illinois</td>
+      <td>54916</td>
+      <td>0.054</td>
+      <td>0.90</td>
+      <td>0.864</td>
+      <td>0.07</td>
+      <td>0.07</td>
+      <td>1.07</td>
+      <td>2.07</td>
+      <td>0.39</td>
+      <td>0.195345</td>
+      <td>1.044016</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>IN</td>
+      <td>Indiana</td>
+      <td>48060</td>
+      <td>0.044</td>
+      <td>0.79</td>
+      <td>0.866</td>
+      <td>0.03</td>
+      <td>0.12</td>
+      <td>1.12</td>
+      <td>2.12</td>
+      <td>0.57</td>
+      <td>0.247009</td>
+      <td>1.757357</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>IA</td>
+      <td>Iowa</td>
+      <td>57810</td>
+      <td>0.036</td>
+      <td>0.60</td>
+      <td>0.914</td>
+      <td>0.03</td>
+      <td>0.09</td>
+      <td>1.09</td>
+      <td>2.09</td>
+      <td>0.52</td>
+      <td>0.454427</td>
+      <td>0.561396</td>
+    </tr>
+    <tr>
+      <th>16</th>
+      <td>KS</td>
+      <td>Kansas</td>
+      <td>53444</td>
+      <td>0.044</td>
+      <td>0.64</td>
+      <td>0.897</td>
+      <td>0.04</td>
+      <td>0.11</td>
+      <td>1.11</td>
+      <td>2.11</td>
+      <td>0.57</td>
+      <td>0.105152</td>
+      <td>2.143987</td>
+    </tr>
+    <tr>
+      <th>17</th>
+      <td>KY</td>
+      <td>Kentucky</td>
+      <td>42786</td>
+      <td>0.050</td>
+      <td>0.56</td>
+      <td>0.817</td>
+      <td>0.03</td>
+      <td>0.17</td>
+      <td>1.17</td>
+      <td>2.17</td>
+      <td>0.63</td>
+      <td>0.324397</td>
+      <td>4.207890</td>
+    </tr>
+    <tr>
+      <th>18</th>
+      <td>LA</td>
+      <td>Louisiana</td>
+      <td>42406</td>
+      <td>0.060</td>
+      <td>0.81</td>
+      <td>0.822</td>
+      <td>0.02</td>
+      <td>0.12</td>
+      <td>1.12</td>
+      <td>2.12</td>
+      <td>0.58</td>
+      <td>0.109733</td>
+      <td>1.341170</td>
+    </tr>
+    <tr>
+      <th>19</th>
+      <td>ME</td>
+      <td>Maine</td>
+      <td>51710</td>
+      <td>0.044</td>
+      <td>0.54</td>
+      <td>0.902</td>
+      <td>NaN</td>
+      <td>0.12</td>
+      <td>1.12</td>
+      <td>2.12</td>
+      <td>0.45</td>
+      <td>0.615574</td>
+      <td>2.626611</td>
+    </tr>
+    <tr>
+      <th>20</th>
+      <td>MD</td>
+      <td>Maryland</td>
+      <td>76165</td>
+      <td>0.051</td>
+      <td>0.97</td>
+      <td>0.890</td>
+      <td>0.08</td>
+      <td>0.06</td>
+      <td>1.06</td>
+      <td>2.06</td>
+      <td>0.35</td>
+      <td>0.370439</td>
+      <td>1.324840</td>
+    </tr>
+    <tr>
+      <th>21</th>
+      <td>MA</td>
+      <td>Massachusetts</td>
+      <td>63151</td>
+      <td>0.046</td>
+      <td>0.97</td>
+      <td>0.890</td>
+      <td>0.09</td>
+      <td>0.08</td>
+      <td>1.08</td>
+      <td>2.08</td>
+      <td>0.34</td>
+      <td>0.630811</td>
+      <td>4.801899</td>
+    </tr>
+    <tr>
+      <th>22</th>
+      <td>MI</td>
+      <td>Michigan</td>
+      <td>52005</td>
+      <td>0.050</td>
+      <td>0.87</td>
+      <td>0.879</td>
+      <td>0.04</td>
+      <td>0.09</td>
+      <td>1.09</td>
+      <td>2.09</td>
+      <td>0.48</td>
+      <td>0.403779</td>
+      <td>3.200442</td>
+    </tr>
+    <tr>
+      <th>23</th>
+      <td>MN</td>
+      <td>Minnesota</td>
+      <td>67244</td>
+      <td>0.038</td>
+      <td>0.75</td>
+      <td>0.915</td>
+      <td>0.05</td>
+      <td>0.05</td>
+      <td>1.05</td>
+      <td>2.05</td>
+      <td>0.45</td>
+      <td>0.627480</td>
+      <td>3.612412</td>
+    </tr>
+    <tr>
+      <th>24</th>
+      <td>MS</td>
+      <td>Mississippi</td>
+      <td>35521</td>
+      <td>0.061</td>
+      <td>0.45</td>
+      <td>0.804</td>
+      <td>NaN</td>
+      <td>0.14</td>
+      <td>1.14</td>
+      <td>2.14</td>
+      <td>0.58</td>
+      <td>0.067447</td>
+      <td>0.622746</td>
+    </tr>
+    <tr>
+      <th>25</th>
+      <td>MO</td>
+      <td>Missouri</td>
+      <td>56630</td>
+      <td>0.053</td>
+      <td>0.78</td>
+      <td>0.868</td>
+      <td>0.02</td>
+      <td>0.07</td>
+      <td>1.07</td>
+      <td>2.07</td>
+      <td>0.57</td>
+      <td>0.184524</td>
+      <td>1.908955</td>
+    </tr>
+    <tr>
+      <th>26</th>
+      <td>MT</td>
+      <td>Montana</td>
+      <td>51102</td>
+      <td>0.041</td>
+      <td>0.34</td>
+      <td>0.908</td>
+      <td>0.01</td>
+      <td>0.10</td>
+      <td>1.10</td>
+      <td>2.10</td>
+      <td>0.57</td>
+      <td>0.495491</td>
+      <td>2.954959</td>
+    </tr>
+    <tr>
+      <th>27</th>
+      <td>NE</td>
+      <td>Nebraska</td>
+      <td>56870</td>
+      <td>0.029</td>
+      <td>0.60</td>
+      <td>0.898</td>
+      <td>0.05</td>
+      <td>0.07</td>
+      <td>1.07</td>
+      <td>2.07</td>
+      <td>0.60</td>
+      <td>0.159490</td>
+      <td>2.686248</td>
+    </tr>
+    <tr>
+      <th>28</th>
+      <td>NV</td>
+      <td>Nevada</td>
+      <td>49875</td>
+      <td>0.067</td>
+      <td>0.87</td>
+      <td>0.839</td>
+      <td>0.10</td>
+      <td>0.08</td>
+      <td>1.08</td>
+      <td>2.08</td>
+      <td>0.46</td>
+      <td>0.141673</td>
+      <td>2.113990</td>
+    </tr>
+    <tr>
+      <th>29</th>
+      <td>NH</td>
+      <td>New Hampshire</td>
+      <td>73397</td>
+      <td>0.034</td>
+      <td>0.63</td>
+      <td>0.913</td>
+      <td>0.03</td>
+      <td>0.06</td>
+      <td>1.06</td>
+      <td>2.06</td>
+      <td>0.47</td>
+      <td>0.151550</td>
+      <td>2.105989</td>
+    </tr>
+    <tr>
+      <th>30</th>
+      <td>NJ</td>
+      <td>New Jersey</td>
+      <td>65243</td>
+      <td>0.056</td>
+      <td>1.00</td>
+      <td>0.874</td>
+      <td>0.11</td>
+      <td>0.07</td>
+      <td>1.07</td>
+      <td>2.07</td>
+      <td>0.42</td>
+      <td>0.078306</td>
+      <td>4.413203</td>
+    </tr>
+    <tr>
+      <th>31</th>
+      <td>NM</td>
+      <td>New Mexico</td>
+      <td>46686</td>
+      <td>0.068</td>
+      <td>0.69</td>
+      <td>0.828</td>
+      <td>0.06</td>
+      <td>0.10</td>
+      <td>1.10</td>
+      <td>2.10</td>
+      <td>0.40</td>
+      <td>0.294811</td>
+      <td>1.886435</td>
+    </tr>
+    <tr>
+      <th>32</th>
+      <td>NY</td>
+      <td>New York</td>
+      <td>54310</td>
+      <td>0.051</td>
+      <td>0.94</td>
+      <td>0.847</td>
+      <td>0.10</td>
+      <td>0.10</td>
+      <td>1.10</td>
+      <td>2.10</td>
+      <td>0.37</td>
+      <td>0.350620</td>
+      <td>3.102164</td>
+    </tr>
+    <tr>
+      <th>33</th>
+      <td>NC</td>
+      <td>North Carolina</td>
+      <td>46784</td>
+      <td>0.058</td>
+      <td>0.76</td>
+      <td>0.843</td>
+      <td>0.05</td>
+      <td>0.10</td>
+      <td>1.10</td>
+      <td>2.10</td>
+      <td>0.51</td>
+      <td>0.244007</td>
+      <td>1.262680</td>
+    </tr>
+    <tr>
+      <th>34</th>
+      <td>ND</td>
+      <td>North Dakota</td>
+      <td>60730</td>
+      <td>0.028</td>
+      <td>0.50</td>
+      <td>0.901</td>
+      <td>0.03</td>
+      <td>0.09</td>
+      <td>1.09</td>
+      <td>2.09</td>
+      <td>0.64</td>
+      <td>NaN</td>
+      <td>4.741070</td>
+    </tr>
+    <tr>
+      <th>35</th>
+      <td>OH</td>
+      <td>Ohio</td>
+      <td>49644</td>
+      <td>0.045</td>
+      <td>0.75</td>
+      <td>0.876</td>
+      <td>0.03</td>
+      <td>0.10</td>
+      <td>1.10</td>
+      <td>2.10</td>
+      <td>0.52</td>
+      <td>0.190714</td>
+      <td>3.240420</td>
+    </tr>
+    <tr>
+      <th>36</th>
+      <td>OK</td>
+      <td>Oklahoma</td>
+      <td>47199</td>
+      <td>0.044</td>
+      <td>0.59</td>
+      <td>0.856</td>
+      <td>0.04</td>
+      <td>0.10</td>
+      <td>1.10</td>
+      <td>2.10</td>
+      <td>0.65</td>
+      <td>0.133629</td>
+      <td>1.081672</td>
+    </tr>
+    <tr>
+      <th>37</th>
+      <td>OR</td>
+      <td>Oregon</td>
+      <td>58875</td>
+      <td>0.062</td>
+      <td>0.87</td>
+      <td>0.891</td>
+      <td>0.07</td>
+      <td>0.10</td>
+      <td>1.10</td>
+      <td>2.10</td>
+      <td>0.41</td>
+      <td>0.832850</td>
+      <td>3.394886</td>
+    </tr>
+    <tr>
+      <th>38</th>
+      <td>PA</td>
+      <td>Pennsylvania</td>
+      <td>55173</td>
+      <td>0.053</td>
+      <td>0.87</td>
+      <td>0.879</td>
+      <td>0.03</td>
+      <td>0.09</td>
+      <td>1.09</td>
+      <td>2.09</td>
+      <td>0.49</td>
+      <td>0.285101</td>
+      <td>0.430928</td>
+    </tr>
+    <tr>
+      <th>39</th>
+      <td>RI</td>
+      <td>Rhode Island</td>
+      <td>58633</td>
+      <td>0.054</td>
+      <td>1.00</td>
+      <td>0.847</td>
+      <td>0.08</td>
+      <td>0.08</td>
+      <td>1.08</td>
+      <td>2.08</td>
+      <td>0.40</td>
+      <td>0.095402</td>
+      <td>1.282572</td>
+    </tr>
+    <tr>
+      <th>40</th>
+      <td>SC</td>
+      <td>South Carolina</td>
+      <td>44929</td>
+      <td>0.057</td>
+      <td>0.79</td>
+      <td>0.836</td>
+      <td>0.03</td>
+      <td>0.09</td>
+      <td>1.09</td>
+      <td>2.09</td>
+      <td>0.55</td>
+      <td>0.209894</td>
+      <td>1.937083</td>
+    </tr>
+    <tr>
+      <th>41</th>
+      <td>SD</td>
+      <td>South Dakota</td>
+      <td>53053</td>
+      <td>0.035</td>
+      <td>0.51</td>
+      <td>0.899</td>
+      <td>NaN</td>
+      <td>0.08</td>
+      <td>1.08</td>
+      <td>2.08</td>
+      <td>0.62</td>
+      <td>NaN</td>
+      <td>3.301737</td>
+    </tr>
+    <tr>
+      <th>42</th>
+      <td>TN</td>
+      <td>Tennessee</td>
+      <td>43716</td>
+      <td>0.057</td>
+      <td>0.82</td>
+      <td>0.831</td>
+      <td>0.04</td>
+      <td>0.13</td>
+      <td>1.13</td>
+      <td>2.13</td>
+      <td>0.61</td>
+      <td>0.199938</td>
+      <td>3.136051</td>
+    </tr>
+    <tr>
+      <th>43</th>
+      <td>TX</td>
+      <td>Texas</td>
+      <td>53875</td>
+      <td>0.042</td>
+      <td>0.92</td>
+      <td>0.799</td>
+      <td>0.11</td>
+      <td>0.08</td>
+      <td>1.08</td>
+      <td>2.08</td>
+      <td>0.53</td>
+      <td>0.213584</td>
+      <td>0.752768</td>
+    </tr>
+    <tr>
+      <th>44</th>
+      <td>UT</td>
+      <td>Utah</td>
+      <td>63383</td>
+      <td>0.036</td>
+      <td>0.82</td>
+      <td>0.904</td>
+      <td>0.04</td>
+      <td>0.08</td>
+      <td>1.08</td>
+      <td>2.08</td>
+      <td>0.47</td>
+      <td>0.136547</td>
+      <td>2.384065</td>
+    </tr>
+    <tr>
+      <th>45</th>
+      <td>VT</td>
+      <td>Vermont</td>
+      <td>60708</td>
+      <td>0.037</td>
+      <td>0.35</td>
+      <td>0.910</td>
+      <td>0.01</td>
+      <td>0.10</td>
+      <td>1.10</td>
+      <td>2.10</td>
+      <td>0.33</td>
+      <td>0.324149</td>
+      <td>1.903081</td>
+    </tr>
+    <tr>
+      <th>46</th>
+      <td>VA</td>
+      <td>Virginia</td>
+      <td>66155</td>
+      <td>0.043</td>
+      <td>0.89</td>
+      <td>0.866</td>
+      <td>0.06</td>
+      <td>0.07</td>
+      <td>1.07</td>
+      <td>2.07</td>
+      <td>0.45</td>
+      <td>0.363249</td>
+      <td>1.724755</td>
+    </tr>
+    <tr>
+      <th>47</th>
+      <td>WA</td>
+      <td>Washington</td>
+      <td>59068</td>
+      <td>0.052</td>
+      <td>0.86</td>
+      <td>0.897</td>
+      <td>0.08</td>
+      <td>0.09</td>
+      <td>1.09</td>
+      <td>2.09</td>
+      <td>0.38</td>
+      <td>0.677488</td>
+      <td>3.817740</td>
+    </tr>
+    <tr>
+      <th>48</th>
+      <td>WV</td>
+      <td>West Virginia</td>
+      <td>39552</td>
+      <td>0.073</td>
+      <td>0.55</td>
+      <td>0.828</td>
+      <td>0.01</td>
+      <td>0.14</td>
+      <td>1.14</td>
+      <td>2.14</td>
+      <td>0.69</td>
+      <td>0.328677</td>
+      <td>2.037054</td>
+    </tr>
+    <tr>
+      <th>49</th>
+      <td>WI</td>
+      <td>Wisconsin</td>
+      <td>58080</td>
+      <td>0.043</td>
+      <td>0.69</td>
+      <td>0.898</td>
+      <td>0.03</td>
+      <td>0.09</td>
+      <td>1.09</td>
+      <td>2.09</td>
+      <td>0.48</td>
+      <td>0.226197</td>
+      <td>1.121945</td>
+    </tr>
+    <tr>
+      <th>50</th>
+      <td>WY</td>
+      <td>Wyoming</td>
+      <td>55690</td>
+      <td>0.040</td>
+      <td>0.31</td>
+      <td>0.918</td>
+      <td>0.02</td>
+      <td>0.09</td>
+      <td>1.09</td>
+      <td>2.09</td>
+      <td>0.70</td>
+      <td>NaN</td>
+      <td>0.266941</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Incidents,-Offenses,-Victims,-and-Known-Offenders-by-Offense-Type">Incidents, Offenses, Victims, and Known Offenders by Offense Type<a class="anchor-link" href="#Incidents,-Offenses,-Victims,-and-Known-Offenders-by-Offense-Type">&#182;</a></h2><p>FBI data</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[12]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">off_by_bias_motivation</span><span class="p">[[</span><span class="s1">&#39;Bias motivation&#39;</span><span class="p">,</span> <span class="s1">&#39;Incidents&#39;</span><span class="p">,</span> <span class="s1">&#39;Offenses&#39;</span><span class="p">,</span> <span class="s1">&#39;Victims&#39;</span><span class="p">,</span> <span class="s1">&#39;Known offenders&#39;</span><span class="p">]][</span><span class="mi">0</span><span class="p">:</span><span class="mi">34</span><span class="p">]</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[12]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Bias motivation</th>
+      <th>Incidents</th>
+      <th>Offenses</th>
+      <th>Victims</th>
+      <th>Known offenders</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Anti-White</td>
+      <td>720</td>
+      <td>876</td>
+      <td>909</td>
+      <td>831</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Anti-Black or African American</td>
+      <td>1739</td>
+      <td>2122</td>
+      <td>2220</td>
+      <td>1588</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Anti-American Indian or Alaska Native</td>
+      <td>154</td>
+      <td>161</td>
+      <td>169</td>
+      <td>118</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Anti-Asian</td>
+      <td>113</td>
+      <td>131</td>
+      <td>137</td>
+      <td>123</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Anti-Native Hawaiian or Other Pacific Islander</td>
+      <td>9</td>
+      <td>9</td>
+      <td>9</td>
+      <td>8</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>Anti-Multiple Races, Group</td>
+      <td>136</td>
+      <td>178</td>
+      <td>190</td>
+      <td>104</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>Anti-Arab</td>
+      <td>51</td>
+      <td>56</td>
+      <td>57</td>
+      <td>60</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>Anti-Hispanic or Latino</td>
+      <td>344</td>
+      <td>449</td>
+      <td>483</td>
+      <td>380</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>Anti-Other Race/Ethnicity/Ancestry</td>
+      <td>223</td>
+      <td>247</td>
+      <td>252</td>
+      <td>171</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>Anti-Jewish</td>
+      <td>684</td>
+      <td>834</td>
+      <td>862</td>
+      <td>421</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>Anti-Catholic</td>
+      <td>62</td>
+      <td>63</td>
+      <td>65</td>
+      <td>45</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>Anti-Protestant</td>
+      <td>15</td>
+      <td>20</td>
+      <td>22</td>
+      <td>12</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>Anti-Islamic (Muslim)</td>
+      <td>307</td>
+      <td>381</td>
+      <td>388</td>
+      <td>243</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>Anti-Other Religion</td>
+      <td>74</td>
+      <td>90</td>
+      <td>91</td>
+      <td>53</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>Anti-Multiple Religions, Group</td>
+      <td>34</td>
+      <td>48</td>
+      <td>48</td>
+      <td>20</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>Anti-Mormon</td>
+      <td>7</td>
+      <td>8</td>
+      <td>8</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>16</th>
+      <td>Anti-Jehovah's Witness</td>
+      <td>2</td>
+      <td>3</td>
+      <td>3</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>17</th>
+      <td>Anti-Eastern Orthodox (Russian, Greek, Other)</td>
+      <td>28</td>
+      <td>28</td>
+      <td>30</td>
+      <td>23</td>
+    </tr>
+    <tr>
+      <th>18</th>
+      <td>Anti-Other Christian</td>
+      <td>36</td>
+      <td>37</td>
+      <td>39</td>
+      <td>13</td>
+    </tr>
+    <tr>
+      <th>19</th>
+      <td>Anti-Buddhist</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>20</th>
+      <td>Anti-Hindu</td>
+      <td>10</td>
+      <td>12</td>
+      <td>12</td>
+      <td>11</td>
+    </tr>
+    <tr>
+      <th>21</th>
+      <td>Anti-Sikh</td>
+      <td>7</td>
+      <td>7</td>
+      <td>8</td>
+      <td>10</td>
+    </tr>
+    <tr>
+      <th>22</th>
+      <td>Anti-Atheism/Agnosticism/etc.</td>
+      <td>6</td>
+      <td>6</td>
+      <td>7</td>
+      <td>4</td>
+    </tr>
+    <tr>
+      <th>23</th>
+      <td>Anti-Gay (Male)</td>
+      <td>675</td>
+      <td>765</td>
+      <td>787</td>
+      <td>806</td>
+    </tr>
+    <tr>
+      <th>24</th>
+      <td>Anti-Lesbian</td>
+      <td>124</td>
+      <td>141</td>
+      <td>147</td>
+      <td>127</td>
+    </tr>
+    <tr>
+      <th>25</th>
+      <td>Anti-Lesbian, Gay, Bisexual, or Transgender (M...</td>
+      <td>234</td>
+      <td>262</td>
+      <td>271</td>
+      <td>254</td>
+    </tr>
+    <tr>
+      <th>26</th>
+      <td>Anti-Heterosexual</td>
+      <td>20</td>
+      <td>23</td>
+      <td>23</td>
+      <td>13</td>
+    </tr>
+    <tr>
+      <th>27</th>
+      <td>Anti-Bisexual</td>
+      <td>23</td>
+      <td>27</td>
+      <td>27</td>
+      <td>25</td>
+    </tr>
+    <tr>
+      <th>28</th>
+      <td>Anti-Physical Disability</td>
+      <td>26</td>
+      <td>29</td>
+      <td>30</td>
+      <td>29</td>
+    </tr>
+    <tr>
+      <th>29</th>
+      <td>Anti-Mental Disability</td>
+      <td>44</td>
+      <td>47</td>
+      <td>47</td>
+      <td>38</td>
+    </tr>
+    <tr>
+      <th>30</th>
+      <td>Anti-Male</td>
+      <td>7</td>
+      <td>10</td>
+      <td>10</td>
+      <td>7</td>
+    </tr>
+    <tr>
+      <th>31</th>
+      <td>Anti-Female</td>
+      <td>24</td>
+      <td>26</td>
+      <td>26</td>
+      <td>21</td>
+    </tr>
+    <tr>
+      <th>32</th>
+      <td>Anti-Transgender</td>
+      <td>105</td>
+      <td>111</td>
+      <td>111</td>
+      <td>149</td>
+    </tr>
+    <tr>
+      <th>33</th>
+      <td>Anti-Gender Non-Conforming</td>
+      <td>19</td>
+      <td>19</td>
+      <td>20</td>
+      <td>16</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Offenses-by-offense-type">Offenses by offense type<a class="anchor-link" href="#Offenses-by-offense-type">&#182;</a></h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[16]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">off_by_off_type</span><span class="p">[[</span><span class="s1">&#39;offense_type&#39;</span><span class="p">,</span> <span class="s1">&#39;Incidents&#39;</span><span class="p">,</span> <span class="s1">&#39;Offenses&#39;</span><span class="p">,</span> <span class="s1">&#39;Victims&#39;</span><span class="p">,</span> <span class="s1">&#39;Known offenders&#39;</span><span class="p">]][</span><span class="mi">0</span><span class="p">:</span><span class="mi">15</span><span class="p">]</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[16]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>offense_type</th>
+      <th>Incidents</th>
+      <th>Offenses</th>
+      <th>Victims</th>
+      <th>Known offenders</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Murder and nonnegligent manslaughter</td>
+      <td>5</td>
+      <td>9</td>
+      <td>9</td>
+      <td>9</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Rape (revised definition)</td>
+      <td>24</td>
+      <td>24</td>
+      <td>24</td>
+      <td>29</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Rape (legacy definition)</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Aggravated assault</td>
+      <td>684</td>
+      <td>873</td>
+      <td>873</td>
+      <td>1031</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Simple assault</td>
+      <td>1458</td>
+      <td>1687</td>
+      <td>1687</td>
+      <td>1857</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>Intimidation</td>
+      <td>1577</td>
+      <td>2109</td>
+      <td>2109</td>
+      <td>1409</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>Robbery</td>
+      <td>134</td>
+      <td>134</td>
+      <td>163</td>
+      <td>249</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>Burglary</td>
+      <td>123</td>
+      <td>123</td>
+      <td>138</td>
+      <td>87</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>Larceny-theft</td>
+      <td>231</td>
+      <td>231</td>
+      <td>253</td>
+      <td>173</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>Motor vehicle theft</td>
+      <td>20</td>
+      <td>20</td>
+      <td>21</td>
+      <td>14</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>Arson</td>
+      <td>39</td>
+      <td>39</td>
+      <td>51</td>
+      <td>33</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>Destruction/damage/vandalism</td>
+      <td>1913</td>
+      <td>1913</td>
+      <td>2122</td>
+      <td>1015</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>Other crimes against persons</td>
+      <td>17</td>
+      <td>18</td>
+      <td>18</td>
+      <td>18</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>Other crimes against property</td>
+      <td>59</td>
+      <td>59</td>
+      <td>65</td>
+      <td>47</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>Crimes against society</td>
+      <td>82</td>
+      <td>82</td>
+      <td>82</td>
+      <td>97</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Known-offender-race-by-offense-type">Known offender race by offense type<a class="anchor-link" href="#Known-offender-race-by-offense-type">&#182;</a></h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[39]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">off_race_by_off_type</span><span class="p">[[</span><span class="s1">&#39;Offense type&#39;</span><span class="p">,</span> <span class="s1">&#39;White&#39;</span><span class="p">,</span> <span class="s1">&#39;Black or African</span><span class="se">\n</span><span class="s1">American&#39;</span><span class="p">,</span> <span class="s1">&#39;American Indian or Alaska Native&#39;</span><span class="p">,</span> <span class="s1">&#39;Asian&#39;</span><span class="p">,</span> <span class="s1">&#39;Native Hawaiian or Other Pacific Islander&#39;</span><span class="p">,</span> <span class="s1">&#39;Group of multiple races&#39;</span><span class="p">,</span> <span class="s1">&#39;Unknown race&#39;</span><span class="p">,</span> <span class="s1">&#39;Unknown offender&#39;</span><span class="p">,</span> <span class="s1">&#39;Total&#39;</span><span class="p">]][</span><span class="mi">0</span><span class="p">:</span><span class="mi">15</span><span class="p">]</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[39]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Offense type</th>
+      <th>White</th>
+      <th>Black or African
+American</th>
+      <th>American Indian or Alaska Native</th>
+      <th>Asian</th>
+      <th>Native Hawaiian or Other Pacific Islander</th>
+      <th>Group of multiple races</th>
+      <th>Unknown race</th>
+      <th>Unknown offender</th>
+      <th>Total</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Murder and nonnegligent manslaughter</td>
+      <td>4</td>
+      <td>5</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>9</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Rape (revised definition)</td>
+      <td>9</td>
+      <td>6</td>
+      <td>2</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>3</td>
+      <td>4</td>
+      <td>24</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Rape (legacy definition)</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Aggravated assault</td>
+      <td>395</td>
+      <td>268</td>
+      <td>9</td>
+      <td>7</td>
+      <td>1</td>
+      <td>63</td>
+      <td>56</td>
+      <td>74</td>
+      <td>873</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Simple assault</td>
+      <td>764</td>
+      <td>513</td>
+      <td>17</td>
+      <td>9</td>
+      <td>3</td>
+      <td>93</td>
+      <td>184</td>
+      <td>104</td>
+      <td>1687</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>Intimidation</td>
+      <td>1015</td>
+      <td>322</td>
+      <td>7</td>
+      <td>19</td>
+      <td>0</td>
+      <td>43</td>
+      <td>262</td>
+      <td>441</td>
+      <td>2109</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>Other crimes against persons</td>
+      <td>10</td>
+      <td>3</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>5</td>
+      <td>18</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>Robbery</td>
+      <td>25</td>
+      <td>67</td>
+      <td>3</td>
+      <td>0</td>
+      <td>0</td>
+      <td>13</td>
+      <td>11</td>
+      <td>15</td>
+      <td>134</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>Burglary</td>
+      <td>33</td>
+      <td>11</td>
+      <td>1</td>
+      <td>1</td>
+      <td>0</td>
+      <td>3</td>
+      <td>18</td>
+      <td>56</td>
+      <td>123</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>Larceny-theft</td>
+      <td>69</td>
+      <td>33</td>
+      <td>1</td>
+      <td>1</td>
+      <td>0</td>
+      <td>2</td>
+      <td>33</td>
+      <td>92</td>
+      <td>231</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>Motor vehicle theft</td>
+      <td>3</td>
+      <td>3</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>4</td>
+      <td>9</td>
+      <td>20</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>Arson</td>
+      <td>13</td>
+      <td>5</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>2</td>
+      <td>4</td>
+      <td>15</td>
+      <td>39</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>Destruction/damage/vandalism</td>
+      <td>267</td>
+      <td>69</td>
+      <td>7</td>
+      <td>7</td>
+      <td>3</td>
+      <td>24</td>
+      <td>422</td>
+      <td>1114</td>
+      <td>1913</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>Other crimes against property</td>
+      <td>19</td>
+      <td>6</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>12</td>
+      <td>22</td>
+      <td>59</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>Crimes against society</td>
+      <td>54</td>
+      <td>20</td>
+      <td>2</td>
+      <td>1</td>
+      <td>0</td>
+      <td>1</td>
+      <td>1</td>
+      <td>3</td>
+      <td>82</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Offender-ethnicity-by-offense-type">Offender ethnicity by offense type<a class="anchor-link" href="#Offender-ethnicity-by-offense-type">&#182;</a></h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[45]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">off_race_by_off_type</span><span class="p">[[</span><span class="s1">&#39;Offense type&#39;</span><span class="p">,</span> <span class="s1">&#39;Hispanic or Latino&#39;</span><span class="p">,</span>
+       <span class="s1">&#39;Not Hispanic or Latino&#39;</span><span class="p">,</span> <span class="s1">&#39;Group of multiple ethnicities&#39;</span><span class="p">,</span>
+       <span class="s1">&#39;Unknown ethnicity&#39;</span><span class="p">,</span> <span class="s1">&#39;Unknown offender&#39;</span><span class="p">,</span> <span class="s1">&#39;Total&#39;</span><span class="p">]][</span><span class="mi">0</span><span class="p">:</span><span class="mi">15</span><span class="p">]</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[45]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Offense type</th>
+      <th>Hispanic or Latino</th>
+      <th>Not Hispanic or Latino</th>
+      <th>Group of multiple ethnicities</th>
+      <th>Unknown ethnicity</th>
+      <th>Unknown offender</th>
+      <th>Total</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Murder and nonnegligent manslaughter</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>3</td>
+      <td>0</td>
+      <td>9</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Rape (revised definition)</td>
+      <td>2</td>
+      <td>2</td>
+      <td>1</td>
+      <td>14</td>
+      <td>4</td>
+      <td>24</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Rape (legacy definition)</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Aggravated assault</td>
+      <td>69</td>
+      <td>179</td>
+      <td>9</td>
+      <td>313</td>
+      <td>74</td>
+      <td>873</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Simple assault</td>
+      <td>90</td>
+      <td>377</td>
+      <td>14</td>
+      <td>654</td>
+      <td>104</td>
+      <td>1687</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>Intimidation</td>
+      <td>52</td>
+      <td>288</td>
+      <td>4</td>
+      <td>893</td>
+      <td>441</td>
+      <td>2109</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>Other crimes against persons</td>
+      <td>1</td>
+      <td>9</td>
+      <td>0</td>
+      <td>3</td>
+      <td>5</td>
+      <td>18</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>Robbery</td>
+      <td>10</td>
+      <td>30</td>
+      <td>1</td>
+      <td>47</td>
+      <td>15</td>
+      <td>134</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>Burglary</td>
+      <td>2</td>
+      <td>12</td>
+      <td>2</td>
+      <td>35</td>
+      <td>56</td>
+      <td>123</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>Larceny-theft</td>
+      <td>1</td>
+      <td>21</td>
+      <td>1</td>
+      <td>101</td>
+      <td>92</td>
+      <td>231</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>Motor vehicle theft</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>11</td>
+      <td>9</td>
+      <td>20</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>Arson</td>
+      <td>3</td>
+      <td>3</td>
+      <td>1</td>
+      <td>7</td>
+      <td>15</td>
+      <td>39</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>Destruction/damage/vandalism</td>
+      <td>23</td>
+      <td>85</td>
+      <td>3</td>
+      <td>329</td>
+      <td>1114</td>
+      <td>1913</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>Other crimes against property</td>
+      <td>1</td>
+      <td>2</td>
+      <td>0</td>
+      <td>34</td>
+      <td>22</td>
+      <td>59</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>Crimes against society</td>
+      <td>0</td>
+      <td>17</td>
+      <td>2</td>
+      <td>60</td>
+      <td>3</td>
+      <td>82</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Offense-type-by-bias-motivation">Offense type by bias motivation<a class="anchor-link" href="#Offense-type-by-bias-motivation">&#182;</a></h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[17]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">off_type_by_bias_motivation</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">35</span><span class="p">]</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[17]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Bias motivation</th>
+      <th>Total</th>
+      <th>Murder and nonnegligent manslaughter</th>
+      <th>Rape(revised definition1)</th>
+      <th>Aggravated assault</th>
+      <th>Simple assault</th>
+      <th>Intimidation</th>
+      <th>Robbery</th>
+      <th>Burglary</th>
+      <th>Larceny-theft</th>
+      <th>Motor vehicle theft</th>
+      <th>Arson</th>
+      <th>Destruction/damage/vandalism</th>
+      <th>Crimes</th>
+      <th>Other</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Anti-White</td>
+      <td>876</td>
+      <td>5</td>
+      <td>5</td>
+      <td>120</td>
+      <td>241</td>
+      <td>188</td>
+      <td>30</td>
+      <td>22</td>
+      <td>78</td>
+      <td>6</td>
+      <td>2</td>
+      <td>122</td>
+      <td>31</td>
+      <td>26</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Anti-Black or African American</td>
+      <td>2122</td>
+      <td>2</td>
+      <td>2</td>
+      <td>273</td>
+      <td>455</td>
+      <td>782</td>
+      <td>14</td>
+      <td>17</td>
+      <td>14</td>
+      <td>2</td>
+      <td>7</td>
+      <td>537</td>
+      <td>10</td>
+      <td>7</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Anti-American Indian or Alaska Native</td>
+      <td>161</td>
+      <td>0</td>
+      <td>1</td>
+      <td>8</td>
+      <td>17</td>
+      <td>36</td>
+      <td>0</td>
+      <td>18</td>
+      <td>31</td>
+      <td>4</td>
+      <td>0</td>
+      <td>29</td>
+      <td>5</td>
+      <td>12</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Anti-Asian</td>
+      <td>131</td>
+      <td>0</td>
+      <td>0</td>
+      <td>15</td>
+      <td>40</td>
+      <td>45</td>
+      <td>2</td>
+      <td>4</td>
+      <td>5</td>
+      <td>0</td>
+      <td>0</td>
+      <td>18</td>
+      <td>2</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Anti-Native Hawaiian or Other Pacific Islander</td>
+      <td>9</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>4</td>
+      <td>3</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>2</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>Anti-Multiple Races, Group</td>
+      <td>178</td>
+      <td>0</td>
+      <td>0</td>
+      <td>17</td>
+      <td>36</td>
+      <td>49</td>
+      <td>4</td>
+      <td>5</td>
+      <td>0</td>
+      <td>1</td>
+      <td>2</td>
+      <td>62</td>
+      <td>0</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>Anti-Arab</td>
+      <td>56</td>
+      <td>0</td>
+      <td>0</td>
+      <td>8</td>
+      <td>16</td>
+      <td>17</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>13</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>Anti-Hispanic or Latino</td>
+      <td>449</td>
+      <td>0</td>
+      <td>1</td>
+      <td>91</td>
+      <td>129</td>
+      <td>140</td>
+      <td>19</td>
+      <td>2</td>
+      <td>5</td>
+      <td>0</td>
+      <td>0</td>
+      <td>57</td>
+      <td>4</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>Anti-Other Race/Ethnicity/Ancestry</td>
+      <td>247</td>
+      <td>0</td>
+      <td>1</td>
+      <td>16</td>
+      <td>64</td>
+      <td>60</td>
+      <td>1</td>
+      <td>7</td>
+      <td>16</td>
+      <td>1</td>
+      <td>1</td>
+      <td>76</td>
+      <td>1</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>Anti-Jewish</td>
+      <td>834</td>
+      <td>0</td>
+      <td>0</td>
+      <td>12</td>
+      <td>61</td>
+      <td>238</td>
+      <td>3</td>
+      <td>9</td>
+      <td>15</td>
+      <td>1</td>
+      <td>4</td>
+      <td>489</td>
+      <td>1</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>Anti-Catholic</td>
+      <td>63</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>5</td>
+      <td>6</td>
+      <td>0</td>
+      <td>3</td>
+      <td>10</td>
+      <td>1</td>
+      <td>1</td>
+      <td>31</td>
+      <td>4</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>Anti-Protestant</td>
+      <td>20</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>3</td>
+      <td>1</td>
+      <td>0</td>
+      <td>1</td>
+      <td>4</td>
+      <td>0</td>
+      <td>1</td>
+      <td>8</td>
+      <td>1</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>Anti-Islamic (Muslim)</td>
+      <td>381</td>
+      <td>0</td>
+      <td>0</td>
+      <td>52</td>
+      <td>75</td>
+      <td>144</td>
+      <td>4</td>
+      <td>2</td>
+      <td>3</td>
+      <td>0</td>
+      <td>5</td>
+      <td>92</td>
+      <td>4</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>Anti-Other Religion</td>
+      <td>90</td>
+      <td>0</td>
+      <td>0</td>
+      <td>13</td>
+      <td>10</td>
+      <td>8</td>
+      <td>1</td>
+      <td>6</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>49</td>
+      <td>1</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>Anti-Multiple Religions, Group</td>
+      <td>48</td>
+      <td>0</td>
+      <td>0</td>
+      <td>2</td>
+      <td>4</td>
+      <td>21</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>2</td>
+      <td>15</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>Anti-Mormon</td>
+      <td>8</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>2</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>1</td>
+      <td>2</td>
+      <td>2</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>16</th>
+      <td>Anti-Jehovah's Witness</td>
+      <td>3</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>2</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>17</th>
+      <td>Anti-Eastern Orthodox (Russian, Greek, Other)</td>
+      <td>28</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>4</td>
+      <td>2</td>
+      <td>0</td>
+      <td>3</td>
+      <td>8</td>
+      <td>1</td>
+      <td>0</td>
+      <td>5</td>
+      <td>2</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>18</th>
+      <td>Anti-Other Christian</td>
+      <td>37</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>3</td>
+      <td>2</td>
+      <td>1</td>
+      <td>3</td>
+      <td>2</td>
+      <td>0</td>
+      <td>3</td>
+      <td>22</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>19</th>
+      <td>Anti-Buddhist</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>20</th>
+      <td>Anti-Hindu</td>
+      <td>12</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>2</td>
+      <td>6</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>2</td>
+      <td>1</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>21</th>
+      <td>Anti-Sikh</td>
+      <td>7</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>2</td>
+      <td>0</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>22</th>
+      <td>Anti-Atheism/Agnosticism/etc.</td>
+      <td>6</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>1</td>
+      <td>2</td>
+      <td>0</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>23</th>
+      <td>Anti-Gay (Male)</td>
+      <td>765</td>
+      <td>1</td>
+      <td>1</td>
+      <td>126</td>
+      <td>281</td>
+      <td>183</td>
+      <td>28</td>
+      <td>6</td>
+      <td>6</td>
+      <td>0</td>
+      <td>1</td>
+      <td>126</td>
+      <td>3</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>24</th>
+      <td>Anti-Lesbian</td>
+      <td>141</td>
+      <td>0</td>
+      <td>4</td>
+      <td>23</td>
+      <td>46</td>
+      <td>37</td>
+      <td>0</td>
+      <td>2</td>
+      <td>3</td>
+      <td>0</td>
+      <td>2</td>
+      <td>23</td>
+      <td>0</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>25</th>
+      <td>Anti-Lesbian, Gay, Bisexual, or Transgender (M...</td>
+      <td>262</td>
+      <td>0</td>
+      <td>4</td>
+      <td>45</td>
+      <td>71</td>
+      <td>59</td>
+      <td>10</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>3</td>
+      <td>64</td>
+      <td>1</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>26</th>
+      <td>Anti-Heterosexual</td>
+      <td>23</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>2</td>
+      <td>7</td>
+      <td>0</td>
+      <td>0</td>
+      <td>5</td>
+      <td>0</td>
+      <td>0</td>
+      <td>6</td>
+      <td>2</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>27</th>
+      <td>Anti-Bisexual</td>
+      <td>27</td>
+      <td>0</td>
+      <td>0</td>
+      <td>2</td>
+      <td>14</td>
+      <td>3</td>
+      <td>0</td>
+      <td>1</td>
+      <td>2</td>
+      <td>1</td>
+      <td>0</td>
+      <td>2</td>
+      <td>0</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>28</th>
+      <td>Anti-Physical Disability</td>
+      <td>29</td>
+      <td>0</td>
+      <td>0</td>
+      <td>2</td>
+      <td>15</td>
+      <td>4</td>
+      <td>0</td>
+      <td>2</td>
+      <td>2</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>1</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>29</th>
+      <td>Anti-Mental Disability</td>
+      <td>47</td>
+      <td>0</td>
+      <td>2</td>
+      <td>3</td>
+      <td>18</td>
+      <td>5</td>
+      <td>1</td>
+      <td>1</td>
+      <td>6</td>
+      <td>0</td>
+      <td>0</td>
+      <td>5</td>
+      <td>4</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>30</th>
+      <td>Anti-Male</td>
+      <td>10</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>7</td>
+      <td>1</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>31</th>
+      <td>Anti-Female</td>
+      <td>26</td>
+      <td>0</td>
+      <td>0</td>
+      <td>6</td>
+      <td>4</td>
+      <td>6</td>
+      <td>0</td>
+      <td>2</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>7</td>
+      <td>0</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>32</th>
+      <td>Anti-Transgender</td>
+      <td>111</td>
+      <td>0</td>
+      <td>1</td>
+      <td>24</td>
+      <td>47</td>
+      <td>14</td>
+      <td>11</td>
+      <td>1</td>
+      <td>2</td>
+      <td>0</td>
+      <td>1</td>
+      <td>5</td>
+      <td>0</td>
+      <td>5</td>
+    </tr>
+    <tr>
+      <th>33</th>
+      <td>Anti-Gender Non-Conforming</td>
+      <td>19</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>2</td>
+      <td>2</td>
+      <td>0</td>
+      <td>1</td>
+      <td>4</td>
+      <td>0</td>
+      <td>0</td>
+      <td>7</td>
+      <td>2</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>34</th>
+      <td>Multiple-Bias Incidents</td>
+      <td>94</td>
+      <td>0</td>
+      <td>1</td>
+      <td>7</td>
+      <td>10</td>
+      <td>35</td>
+      <td>3</td>
+      <td>1</td>
+      <td>4</td>
+      <td>0</td>
+      <td>1</td>
+      <td>31</td>
+      <td>0</td>
+      <td>1</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Offender-race-by-bias-motivation">Offender race by bias motivation<a class="anchor-link" href="#Offender-race-by-bias-motivation">&#182;</a></h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[25]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">off_race_by_bias_motivation</span><span class="p">[[</span><span class="s1">&#39;Bias motivation&#39;</span><span class="p">,</span> <span class="s1">&#39;White&#39;</span><span class="p">,</span> <span class="s1">&#39;Black or African American&#39;</span><span class="p">,</span> <span class="s1">&#39;American Indian or Alaska Native&#39;</span><span class="p">,</span> <span class="s1">&#39;Asian&#39;</span><span class="p">,</span> <span class="s1">&#39;Native Hawaiian or Other Pacific Islander&#39;</span><span class="p">,</span> <span class="s1">&#39;Group of multiple races&#39;</span><span class="p">,</span> <span class="s1">&#39;Unknown race&#39;</span><span class="p">,</span> <span class="s1">&#39;Unknown offender&#39;</span><span class="p">]][</span><span class="mi">0</span><span class="p">:</span><span class="mi">35</span><span class="p">]</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[25]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Bias motivation</th>
+      <th>White</th>
+      <th>Black or African American</th>
+      <th>American Indian or Alaska Native</th>
+      <th>Asian</th>
+      <th>Native Hawaiian or Other Pacific Islander</th>
+      <th>Group of multiple races</th>
+      <th>Unknown race</th>
+      <th>Unknown offender</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Anti-White</td>
+      <td>133</td>
+      <td>452</td>
+      <td>20</td>
+      <td>6</td>
+      <td>0</td>
+      <td>27</td>
+      <td>80</td>
+      <td>158</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Anti-Black or African American</td>
+      <td>1142</td>
+      <td>80</td>
+      <td>9</td>
+      <td>17</td>
+      <td>1</td>
+      <td>88</td>
+      <td>202</td>
+      <td>583</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Anti-American Indian or Alaska Native</td>
+      <td>56</td>
+      <td>28</td>
+      <td>2</td>
+      <td>0</td>
+      <td>0</td>
+      <td>3</td>
+      <td>14</td>
+      <td>58</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Anti-Asian</td>
+      <td>65</td>
+      <td>20</td>
+      <td>2</td>
+      <td>6</td>
+      <td>0</td>
+      <td>5</td>
+      <td>9</td>
+      <td>24</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Anti-Native Hawaiian or Other Pacific Islander</td>
+      <td>4</td>
+      <td>4</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>Anti-Multiple Races, Group</td>
+      <td>54</td>
+      <td>33</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>9</td>
+      <td>17</td>
+      <td>64</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>Anti-Arab</td>
+      <td>32</td>
+      <td>6</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>3</td>
+      <td>6</td>
+      <td>8</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>Anti-Hispanic or Latino</td>
+      <td>228</td>
+      <td>114</td>
+      <td>2</td>
+      <td>0</td>
+      <td>1</td>
+      <td>12</td>
+      <td>24</td>
+      <td>68</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>Anti-Other Race/Ethnicity/Ancestry</td>
+      <td>61</td>
+      <td>44</td>
+      <td>2</td>
+      <td>1</td>
+      <td>0</td>
+      <td>3</td>
+      <td>46</td>
+      <td>90</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>Anti-Jewish</td>
+      <td>156</td>
+      <td>34</td>
+      <td>4</td>
+      <td>0</td>
+      <td>0</td>
+      <td>12</td>
+      <td>300</td>
+      <td>328</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>Anti-Catholic</td>
+      <td>9</td>
+      <td>3</td>
+      <td>0</td>
+      <td>2</td>
+      <td>0</td>
+      <td>3</td>
+      <td>22</td>
+      <td>24</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>Anti-Protestant</td>
+      <td>11</td>
+      <td>2</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>3</td>
+      <td>4</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>Anti-Islamic (Muslim)</td>
+      <td>135</td>
+      <td>49</td>
+      <td>1</td>
+      <td>2</td>
+      <td>0</td>
+      <td>9</td>
+      <td>66</td>
+      <td>119</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>Anti-Other Religion</td>
+      <td>20</td>
+      <td>20</td>
+      <td>0</td>
+      <td>1</td>
+      <td>2</td>
+      <td>1</td>
+      <td>7</td>
+      <td>39</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>Anti-Multiple Religions, Group</td>
+      <td>20</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>4</td>
+      <td>4</td>
+      <td>19</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>Anti-Mormon</td>
+      <td>2</td>
+      <td>2</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>4</td>
+    </tr>
+    <tr>
+      <th>16</th>
+      <td>Anti-Jehovah's Witness</td>
+      <td>2</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>17</th>
+      <td>Anti-Eastern Orthodox (Russian, Greek, Other)</td>
+      <td>15</td>
+      <td>3</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>9</td>
+    </tr>
+    <tr>
+      <th>18</th>
+      <td>Anti-Other Christian</td>
+      <td>4</td>
+      <td>2</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>6</td>
+      <td>24</td>
+    </tr>
+    <tr>
+      <th>19</th>
+      <td>Anti-Buddhist</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>20</th>
+      <td>Anti-Hindu</td>
+      <td>9</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>21</th>
+      <td>Anti-Sikh</td>
+      <td>4</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>1</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>22</th>
+      <td>Anti-Atheism/Agnosticism/etc.</td>
+      <td>2</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>23</th>
+      <td>Anti-Gay (Male)</td>
+      <td>257</td>
+      <td>223</td>
+      <td>2</td>
+      <td>1</td>
+      <td>2</td>
+      <td>33</td>
+      <td>102</td>
+      <td>145</td>
+    </tr>
+    <tr>
+      <th>24</th>
+      <td>Anti-Lesbian</td>
+      <td>51</td>
+      <td>37</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>3</td>
+      <td>14</td>
+      <td>36</td>
+    </tr>
+    <tr>
+      <th>25</th>
+      <td>Anti-Lesbian, Gay, Bisexual, or Transgender (M...</td>
+      <td>86</td>
+      <td>53</td>
+      <td>4</td>
+      <td>3</td>
+      <td>1</td>
+      <td>12</td>
+      <td>37</td>
+      <td>66</td>
+    </tr>
+    <tr>
+      <th>26</th>
+      <td>Anti-Heterosexual</td>
+      <td>12</td>
+      <td>1</td>
+      <td>0</td>
+      <td>2</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>7</td>
+    </tr>
+    <tr>
+      <th>27</th>
+      <td>Anti-Bisexual</td>
+      <td>8</td>
+      <td>12</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>3</td>
+      <td>4</td>
+    </tr>
+    <tr>
+      <th>28</th>
+      <td>Anti-Physical</td>
+      <td>14</td>
+      <td>8</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>1</td>
+      <td>2</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>29</th>
+      <td>Anti-Mental</td>
+      <td>21</td>
+      <td>8</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>4</td>
+      <td>13</td>
+    </tr>
+    <tr>
+      <th>30</th>
+      <td>Anti-Male</td>
+      <td>10</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>31</th>
+      <td>Anti-Female</td>
+      <td>8</td>
+      <td>9</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>4</td>
+      <td>4</td>
+    </tr>
+    <tr>
+      <th>32</th>
+      <td>Anti-Transgender</td>
+      <td>27</td>
+      <td>54</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>9</td>
+      <td>14</td>
+      <td>7</td>
+    </tr>
+    <tr>
+      <th>33</th>
+      <td>Anti-Gender Non-Conforming</td>
+      <td>3</td>
+      <td>3</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>5</td>
+      <td>7</td>
+    </tr>
+    <tr>
+      <th>34</th>
+      <td>Multiple-Bias Incidents</td>
+      <td>19</td>
+      <td>24</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>3</td>
+      <td>17</td>
+      <td>31</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Offender-ethnicity-by-bias-motivation">Offender ethnicity by bias motivation<a class="anchor-link" href="#Offender-ethnicity-by-bias-motivation">&#182;</a></h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[26]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">off_race_by_bias_motivation</span><span class="p">[[</span><span class="s1">&#39;Bias motivation&#39;</span><span class="p">,</span> <span class="s1">&#39;Hispanic or Latino&#39;</span><span class="p">,</span> <span class="s1">&#39;Not Hispanic or Latino&#39;</span><span class="p">,</span> <span class="s1">&#39;Group of multiple ethnicities&#39;</span><span class="p">,</span> <span class="s1">&#39;Unknown ethnicity&#39;</span><span class="p">,</span> <span class="s1">&#39;Unknown offender&#39;</span><span class="p">]][</span><span class="mi">0</span><span class="p">:</span><span class="mi">35</span><span class="p">]</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[26]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Bias motivation</th>
+      <th>Hispanic or Latino</th>
+      <th>Not Hispanic or Latino</th>
+      <th>Group of multiple ethnicities</th>
+      <th>Unknown ethnicity</th>
+      <th>Unknown offender</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Anti-White</td>
+      <td>22</td>
+      <td>169</td>
+      <td>9</td>
+      <td>393</td>
+      <td>158</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Anti-Black or African American</td>
+      <td>82</td>
+      <td>267</td>
+      <td>5</td>
+      <td>808</td>
+      <td>583</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Anti-American Indian or Alaska Native</td>
+      <td>1</td>
+      <td>3</td>
+      <td>0</td>
+      <td>92</td>
+      <td>58</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Anti-Asian</td>
+      <td>6</td>
+      <td>28</td>
+      <td>3</td>
+      <td>40</td>
+      <td>24</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Anti-Native Hawaiian or Other Pacific Islander</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>3</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>Anti-Multiple Races, Group</td>
+      <td>2</td>
+      <td>31</td>
+      <td>1</td>
+      <td>50</td>
+      <td>64</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>Anti-Arab</td>
+      <td>4</td>
+      <td>16</td>
+      <td>0</td>
+      <td>14</td>
+      <td>8</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>Anti-Hispanic or Latino</td>
+      <td>15</td>
+      <td>112</td>
+      <td>2</td>
+      <td>150</td>
+      <td>68</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>Anti-Other Race/Ethnicity/Ancestry</td>
+      <td>3</td>
+      <td>35</td>
+      <td>2</td>
+      <td>68</td>
+      <td>90</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>Anti-Jewish</td>
+      <td>9</td>
+      <td>16</td>
+      <td>4</td>
+      <td>152</td>
+      <td>328</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>Anti-Catholic</td>
+      <td>4</td>
+      <td>3</td>
+      <td>0</td>
+      <td>14</td>
+      <td>24</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>Anti-Protestant</td>
+      <td>0</td>
+      <td>8</td>
+      <td>0</td>
+      <td>6</td>
+      <td>4</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>Anti-Islamic (Muslim)</td>
+      <td>5</td>
+      <td>40</td>
+      <td>2</td>
+      <td>121</td>
+      <td>119</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>Anti-Other Religion</td>
+      <td>2</td>
+      <td>16</td>
+      <td>2</td>
+      <td>18</td>
+      <td>39</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>Anti-Multiple Religions, Group</td>
+      <td>0</td>
+      <td>4</td>
+      <td>0</td>
+      <td>21</td>
+      <td>19</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>Anti-Mormon</td>
+      <td>0</td>
+      <td>4</td>
+      <td>0</td>
+      <td>0</td>
+      <td>4</td>
+    </tr>
+    <tr>
+      <th>16</th>
+      <td>Anti-Jehovah's Witness</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>17</th>
+      <td>Anti-Eastern Orthodox (Russian, Greek, Other)</td>
+      <td>0</td>
+      <td>4</td>
+      <td>0</td>
+      <td>15</td>
+      <td>9</td>
+    </tr>
+    <tr>
+      <th>18</th>
+      <td>Anti-Other Christian</td>
+      <td>3</td>
+      <td>1</td>
+      <td>0</td>
+      <td>5</td>
+      <td>24</td>
+    </tr>
+    <tr>
+      <th>19</th>
+      <td>Anti-Buddhist</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>20</th>
+      <td>Anti-Hindu</td>
+      <td>0</td>
+      <td>2</td>
+      <td>0</td>
+      <td>5</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>21</th>
+      <td>Anti-Sikh</td>
+      <td>0</td>
+      <td>2</td>
+      <td>1</td>
+      <td>4</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>22</th>
+      <td>Anti-Atheism/Agnosticism/etc.</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>3</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>23</th>
+      <td>Anti-Gay (Male)</td>
+      <td>63</td>
+      <td>126</td>
+      <td>6</td>
+      <td>209</td>
+      <td>145</td>
+    </tr>
+    <tr>
+      <th>24</th>
+      <td>Anti-Lesbian</td>
+      <td>6</td>
+      <td>24</td>
+      <td>0</td>
+      <td>34</td>
+      <td>36</td>
+    </tr>
+    <tr>
+      <th>25</th>
+      <td>Anti-Lesbian, Gay, Bisexual, or Transgender (M...</td>
+      <td>10</td>
+      <td>20</td>
+      <td>1</td>
+      <td>140</td>
+      <td>66</td>
+    </tr>
+    <tr>
+      <th>26</th>
+      <td>Anti-Heterosexual</td>
+      <td>1</td>
+      <td>1</td>
+      <td>0</td>
+      <td>9</td>
+      <td>7</td>
+    </tr>
+    <tr>
+      <th>27</th>
+      <td>Anti-Bisexual</td>
+      <td>0</td>
+      <td>6</td>
+      <td>0</td>
+      <td>14</td>
+      <td>4</td>
+    </tr>
+    <tr>
+      <th>28</th>
+      <td>Anti-Physical</td>
+      <td>0</td>
+      <td>7</td>
+      <td>0</td>
+      <td>14</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>29</th>
+      <td>Anti-Mental</td>
+      <td>2</td>
+      <td>7</td>
+      <td>0</td>
+      <td>25</td>
+      <td>13</td>
+    </tr>
+    <tr>
+      <th>30</th>
+      <td>Anti-Male</td>
+      <td>0</td>
+      <td>2</td>
+      <td>0</td>
+      <td>8</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>31</th>
+      <td>Anti-Female</td>
+      <td>0</td>
+      <td>6</td>
+      <td>0</td>
+      <td>9</td>
+      <td>4</td>
+    </tr>
+    <tr>
+      <th>32</th>
+      <td>Anti-Transgender</td>
+      <td>12</td>
+      <td>33</td>
+      <td>0</td>
+      <td>30</td>
+      <td>7</td>
+    </tr>
+    <tr>
+      <th>33</th>
+      <td>Anti-Gender Non-Conforming</td>
+      <td>0</td>
+      <td>4</td>
+      <td>0</td>
+      <td>2</td>
+      <td>7</td>
+    </tr>
+    <tr>
+      <th>34</th>
+      <td>Multiple-Bias Incidents</td>
+      <td>2</td>
+      <td>28</td>
+      <td>0</td>
+      <td>28</td>
+      <td>31</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Offense-type-by-state">Offense type by state<a class="anchor-link" href="#Offense-type-by-state">&#182;</a></h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[23]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">off_by_state</span><span class="p">[</span><span class="mi">1</span><span class="p">::]</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[23]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>state</th>
+      <th>total</th>
+      <th>Murder and nonnegligent manslaughter</th>
+      <th>Rape (revised definition1)</th>
+      <th>Aggravated assault</th>
+      <th>Simple assault</th>
+      <th>Intimidation</th>
+      <th>Robbery</th>
+      <th>Burglary</th>
+      <th>Larceny-theft</th>
+      <th>Motor vehicle theft</th>
+      <th>Arson</th>
+      <th>Destruction/damage/vandalism</th>
+      <th>Crimes against society</th>
+      <th>Other</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>1</th>
+      <td>Alabama</td>
+      <td>17</td>
+      <td>0</td>
+      <td>0.0</td>
+      <td>0</td>
+      <td>2</td>
+      <td>11</td>
+      <td>0</td>
+      <td>0</td>
+      <td>2</td>
+      <td>0</td>
+      <td>0</td>
+      <td>2</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Alaska</td>
+      <td>13</td>
+      <td>0</td>
+      <td>0.0</td>
+      <td>1</td>
+      <td>6</td>
+      <td>1</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>3</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Arizona</td>
+      <td>291</td>
+      <td>0</td>
+      <td>0.0</td>
+      <td>41</td>
+      <td>65</td>
+      <td>112</td>
+      <td>6</td>
+      <td>1</td>
+      <td>4</td>
+      <td>0</td>
+      <td>0</td>
+      <td>62</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Arkansas</td>
+      <td>15</td>
+      <td>0</td>
+      <td>0.0</td>
+      <td>1</td>
+      <td>5</td>
+      <td>2</td>
+      <td>0</td>
+      <td>1</td>
+      <td>1</td>
+      <td>0</td>
+      <td>1</td>
+      <td>3</td>
+      <td>1</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>California</td>
+      <td>1142</td>
+      <td>0</td>
+      <td>1.0</td>
+      <td>191</td>
+      <td>240</td>
+      <td>308</td>
+      <td>31</td>
+      <td>14</td>
+      <td>6</td>
+      <td>2</td>
+      <td>12</td>
+      <td>337</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>Colorado</td>
+      <td>126</td>
+      <td>0</td>
+      <td>1.0</td>
+      <td>15</td>
+      <td>25</td>
+      <td>39</td>
+      <td>4</td>
+      <td>1</td>
+      <td>1</td>
+      <td>0</td>
+      <td>1</td>
+      <td>39</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>Connecticut</td>
+      <td>124</td>
+      <td>0</td>
+      <td>0.0</td>
+      <td>12</td>
+      <td>18</td>
+      <td>40</td>
+      <td>1</td>
+      <td>1</td>
+      <td>7</td>
+      <td>0</td>
+      <td>0</td>
+      <td>39</td>
+      <td>5</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>Delaware</td>
+      <td>19</td>
+      <td>0</td>
+      <td>0.0</td>
+      <td>1</td>
+      <td>7</td>
+      <td>5</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>5</td>
+      <td>0</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>District of Columbia</td>
+      <td>127</td>
+      <td>0</td>
+      <td>0.0</td>
+      <td>17</td>
+      <td>62</td>
+      <td>23</td>
+      <td>6</td>
+      <td>0</td>
+      <td>2</td>
+      <td>0</td>
+      <td>0</td>
+      <td>17</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>Florida</td>
+      <td>110</td>
+      <td>0</td>
+      <td>0.0</td>
+      <td>28</td>
+      <td>28</td>
+      <td>18</td>
+      <td>4</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>31</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>Georgia</td>
+      <td>46</td>
+      <td>0</td>
+      <td>NaN</td>
+      <td>6</td>
+      <td>16</td>
+      <td>12</td>
+      <td>1</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>10</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>Idaho</td>
+      <td>35</td>
+      <td>1</td>
+      <td>0.0</td>
+      <td>7</td>
+      <td>9</td>
+      <td>5</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>13</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>Illinois</td>
+      <td>122</td>
+      <td>0</td>
+      <td>1.0</td>
+      <td>23</td>
+      <td>32</td>
+      <td>31</td>
+      <td>1</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>1</td>
+      <td>32</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>Indiana</td>
+      <td>163</td>
+      <td>3</td>
+      <td>1.0</td>
+      <td>4</td>
+      <td>24</td>
+      <td>101</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>23</td>
+      <td>5</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>Iowa</td>
+      <td>21</td>
+      <td>0</td>
+      <td>0.0</td>
+      <td>4</td>
+      <td>2</td>
+      <td>8</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>5</td>
+      <td>1</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>16</th>
+      <td>Kansas</td>
+      <td>70</td>
+      <td>0</td>
+      <td>0.0</td>
+      <td>16</td>
+      <td>11</td>
+      <td>26</td>
+      <td>0</td>
+      <td>2</td>
+      <td>4</td>
+      <td>0</td>
+      <td>0</td>
+      <td>9</td>
+      <td>0</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>17</th>
+      <td>Kentucky</td>
+      <td>241</td>
+      <td>0</td>
+      <td>0.0</td>
+      <td>15</td>
+      <td>39</td>
+      <td>76</td>
+      <td>4</td>
+      <td>11</td>
+      <td>20</td>
+      <td>4</td>
+      <td>2</td>
+      <td>61</td>
+      <td>2</td>
+      <td>7</td>
+    </tr>
+    <tr>
+      <th>18</th>
+      <td>Louisiana</td>
+      <td>33</td>
+      <td>0</td>
+      <td>0.0</td>
+      <td>5</td>
+      <td>10</td>
+      <td>7</td>
+      <td>0</td>
+      <td>2</td>
+      <td>3</td>
+      <td>0</td>
+      <td>0</td>
+      <td>4</td>
+      <td>2</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>19</th>
+      <td>Maine</td>
+      <td>45</td>
+      <td>0</td>
+      <td>0.0</td>
+      <td>1</td>
+      <td>6</td>
+      <td>23</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>14</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>20</th>
+      <td>Maryland</td>
+      <td>40</td>
+      <td>0</td>
+      <td>0.0</td>
+      <td>11</td>
+      <td>11</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>17</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>21</th>
+      <td>Massachusetts</td>
+      <td>444</td>
+      <td>0</td>
+      <td>1.0</td>
+      <td>54</td>
+      <td>84</td>
+      <td>139</td>
+      <td>2</td>
+      <td>4</td>
+      <td>14</td>
+      <td>0</td>
+      <td>3</td>
+      <td>136</td>
+      <td>2</td>
+      <td>5</td>
+    </tr>
+    <tr>
+      <th>22</th>
+      <td>Michigan</td>
+      <td>459</td>
+      <td>0</td>
+      <td>3.0</td>
+      <td>62</td>
+      <td>96</td>
+      <td>179</td>
+      <td>2</td>
+      <td>6</td>
+      <td>10</td>
+      <td>1</td>
+      <td>1</td>
+      <td>75</td>
+      <td>16</td>
+      <td>8</td>
+    </tr>
+    <tr>
+      <th>23</th>
+      <td>Minnesota</td>
+      <td>165</td>
+      <td>0</td>
+      <td>0.0</td>
+      <td>28</td>
+      <td>52</td>
+      <td>47</td>
+      <td>4</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>1</td>
+      <td>32</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>24</th>
+      <td>Mississippi</td>
+      <td>10</td>
+      <td>0</td>
+      <td>0.0</td>
+      <td>0</td>
+      <td>3</td>
+      <td>0</td>
+      <td>0</td>
+      <td>2</td>
+      <td>2</td>
+      <td>0</td>
+      <td>0</td>
+      <td>3</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>25</th>
+      <td>Missouri</td>
+      <td>114</td>
+      <td>0</td>
+      <td>1.0</td>
+      <td>27</td>
+      <td>32</td>
+      <td>20</td>
+      <td>7</td>
+      <td>2</td>
+      <td>1</td>
+      <td>2</td>
+      <td>1</td>
+      <td>20</td>
+      <td>1</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>26</th>
+      <td>Montana</td>
+      <td>20</td>
+      <td>0</td>
+      <td>1.0</td>
+      <td>1</td>
+      <td>2</td>
+      <td>3</td>
+      <td>0</td>
+      <td>2</td>
+      <td>4</td>
+      <td>1</td>
+      <td>0</td>
+      <td>4</td>
+      <td>1</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>27</th>
+      <td>Nebraska</td>
+      <td>35</td>
+      <td>0</td>
+      <td>1.0</td>
+      <td>4</td>
+      <td>14</td>
+      <td>4</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>8</td>
+      <td>2</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>28</th>
+      <td>Nevada</td>
+      <td>49</td>
+      <td>0</td>
+      <td>1.0</td>
+      <td>13</td>
+      <td>18</td>
+      <td>3</td>
+      <td>3</td>
+      <td>1</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>9</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>29</th>
+      <td>New Hampshire</td>
+      <td>40</td>
+      <td>0</td>
+      <td>0.0</td>
+      <td>1</td>
+      <td>5</td>
+      <td>24</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>10</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>30</th>
+      <td>New Jersey</td>
+      <td>308</td>
+      <td>0</td>
+      <td>0.0</td>
+      <td>2</td>
+      <td>12</td>
+      <td>179</td>
+      <td>3</td>
+      <td>2</td>
+      <td>2</td>
+      <td>0</td>
+      <td>0</td>
+      <td>108</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>31</th>
+      <td>New Mexico</td>
+      <td>36</td>
+      <td>0</td>
+      <td>0.0</td>
+      <td>3</td>
+      <td>13</td>
+      <td>11</td>
+      <td>1</td>
+      <td>2</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>6</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>32</th>
+      <td>New York</td>
+      <td>598</td>
+      <td>0</td>
+      <td>1.0</td>
+      <td>61</td>
+      <td>209</td>
+      <td>0</td>
+      <td>9</td>
+      <td>11</td>
+      <td>11</td>
+      <td>0</td>
+      <td>7</td>
+      <td>289</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>33</th>
+      <td>North Carolina</td>
+      <td>208</td>
+      <td>0</td>
+      <td>0.0</td>
+      <td>27</td>
+      <td>47</td>
+      <td>70</td>
+      <td>5</td>
+      <td>3</td>
+      <td>5</td>
+      <td>0</td>
+      <td>1</td>
+      <td>50</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>34</th>
+      <td>North Dakota</td>
+      <td>8</td>
+      <td>0</td>
+      <td>0.0</td>
+      <td>1</td>
+      <td>4</td>
+      <td>3</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>35</th>
+      <td>Ohio</td>
+      <td>508</td>
+      <td>0</td>
+      <td>0.0</td>
+      <td>22</td>
+      <td>68</td>
+      <td>224</td>
+      <td>6</td>
+      <td>22</td>
+      <td>58</td>
+      <td>5</td>
+      <td>0</td>
+      <td>84</td>
+      <td>3</td>
+      <td>16</td>
+    </tr>
+    <tr>
+      <th>36</th>
+      <td>Oklahoma</td>
+      <td>35</td>
+      <td>0</td>
+      <td>2.0</td>
+      <td>2</td>
+      <td>7</td>
+      <td>15</td>
+      <td>2</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>5</td>
+      <td>0</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>37</th>
+      <td>Oregon</td>
+      <td>122</td>
+      <td>0</td>
+      <td>1.0</td>
+      <td>18</td>
+      <td>20</td>
+      <td>33</td>
+      <td>1</td>
+      <td>2</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>43</td>
+      <td>2</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>38</th>
+      <td>Pennsylvania</td>
+      <td>67</td>
+      <td>0</td>
+      <td>0.0</td>
+      <td>3</td>
+      <td>24</td>
+      <td>25</td>
+      <td>0</td>
+      <td>1</td>
+      <td>2</td>
+      <td>0</td>
+      <td>2</td>
+      <td>10</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>39</th>
+      <td>Rhode Island</td>
+      <td>13</td>
+      <td>0</td>
+      <td>0.0</td>
+      <td>0</td>
+      <td>4</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>7</td>
+      <td>1</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>40</th>
+      <td>South Carolina</td>
+      <td>23</td>
+      <td>0</td>
+      <td>0.0</td>
+      <td>4</td>
+      <td>5</td>
+      <td>4</td>
+      <td>0</td>
+      <td>0</td>
+      <td>2</td>
+      <td>0</td>
+      <td>0</td>
+      <td>8</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>41</th>
+      <td>South Dakota</td>
+      <td>21</td>
+      <td>0</td>
+      <td>0.0</td>
+      <td>1</td>
+      <td>9</td>
+      <td>2</td>
+      <td>0</td>
+      <td>1</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>3</td>
+      <td>4</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>42</th>
+      <td>Tennessee</td>
+      <td>190</td>
+      <td>0</td>
+      <td>0.0</td>
+      <td>18</td>
+      <td>62</td>
+      <td>44</td>
+      <td>2</td>
+      <td>3</td>
+      <td>9</td>
+      <td>0</td>
+      <td>0</td>
+      <td>35</td>
+      <td>14</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>43</th>
+      <td>Texas</td>
+      <td>224</td>
+      <td>5</td>
+      <td>0.0</td>
+      <td>42</td>
+      <td>57</td>
+      <td>53</td>
+      <td>9</td>
+      <td>3</td>
+      <td>8</td>
+      <td>0</td>
+      <td>0</td>
+      <td>42</td>
+      <td>0</td>
+      <td>5</td>
+    </tr>
+    <tr>
+      <th>44</th>
+      <td>Utah</td>
+      <td>72</td>
+      <td>0</td>
+      <td>2.0</td>
+      <td>2</td>
+      <td>22</td>
+      <td>2</td>
+      <td>1</td>
+      <td>3</td>
+      <td>6</td>
+      <td>0</td>
+      <td>0</td>
+      <td>18</td>
+      <td>13</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>45</th>
+      <td>Vermont</td>
+      <td>26</td>
+      <td>0</td>
+      <td>0.0</td>
+      <td>1</td>
+      <td>8</td>
+      <td>1</td>
+      <td>0</td>
+      <td>1</td>
+      <td>4</td>
+      <td>0</td>
+      <td>0</td>
+      <td>11</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>46</th>
+      <td>Virginia</td>
+      <td>150</td>
+      <td>0</td>
+      <td>2.0</td>
+      <td>10</td>
+      <td>52</td>
+      <td>31</td>
+      <td>2</td>
+      <td>1</td>
+      <td>4</td>
+      <td>0</td>
+      <td>1</td>
+      <td>42</td>
+      <td>1</td>
+      <td>4</td>
+    </tr>
+    <tr>
+      <th>47</th>
+      <td>Washington</td>
+      <td>482</td>
+      <td>0</td>
+      <td>2.0</td>
+      <td>52</td>
+      <td>111</td>
+      <td>133</td>
+      <td>11</td>
+      <td>13</td>
+      <td>22</td>
+      <td>4</td>
+      <td>1</td>
+      <td>113</td>
+      <td>5</td>
+      <td>15</td>
+    </tr>
+    <tr>
+      <th>48</th>
+      <td>West Virginia</td>
+      <td>48</td>
+      <td>0</td>
+      <td>2.0</td>
+      <td>10</td>
+      <td>16</td>
+      <td>2</td>
+      <td>1</td>
+      <td>2</td>
+      <td>9</td>
+      <td>0</td>
+      <td>0</td>
+      <td>3</td>
+      <td>1</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>49</th>
+      <td>Wisconsin</td>
+      <td>42</td>
+      <td>0</td>
+      <td>0.0</td>
+      <td>4</td>
+      <td>10</td>
+      <td>10</td>
+      <td>0</td>
+      <td>2</td>
+      <td>3</td>
+      <td>0</td>
+      <td>0</td>
+      <td>13</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>50</th>
+      <td>Wyoming</td>
+      <td>4</td>
+      <td>0</td>
+      <td>0.0</td>
+      <td>1</td>
+      <td>3</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Bias-motivation-by-location-type">Bias motivation by location type<a class="anchor-link" href="#Bias-motivation-by-location-type">&#182;</a></h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[28]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">locations</span><span class="p">[[</span><span class="s1">&#39;Location&#39;</span><span class="p">,</span> <span class="s1">&#39;Total incidents&#39;</span><span class="p">,</span> <span class="s1">&#39;Race/Ethnicity/Ancestry&#39;</span><span class="p">,</span> <span class="s1">&#39;Religion&#39;</span><span class="p">,</span> <span class="s1">&#39;Sexual orientation&#39;</span><span class="p">,</span> <span class="s1">&#39;Disability&#39;</span><span class="p">,</span> <span class="s1">&#39;Gender&#39;</span><span class="p">,</span> <span class="s1">&#39;Gender Identity&#39;</span><span class="p">,</span> <span class="s1">&#39;Multiple-bias incidents&#39;</span><span class="p">]][</span><span class="mi">1</span><span class="p">::]</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[28]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Location</th>
+      <th>Total incidents</th>
+      <th>Race/Ethnicity/Ancestry</th>
+      <th>Religion</th>
+      <th>Sexual orientation</th>
+      <th>Disability</th>
+      <th>Gender</th>
+      <th>Gender Identity</th>
+      <th>Multiple-bias incidents</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>1</th>
+      <td>Abandoned/condemned structure</td>
+      <td>5</td>
+      <td>2</td>
+      <td>3</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Air/bus/train terminal</td>
+      <td>94</td>
+      <td>60</td>
+      <td>11</td>
+      <td>16</td>
+      <td>2</td>
+      <td>0</td>
+      <td>2</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Amusement park</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Arena/stadium/fairgrounds/coliseum</td>
+      <td>6</td>
+      <td>4</td>
+      <td>1</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>ATM separate from bank</td>
+      <td>1</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>Auto dealership new/used</td>
+      <td>6</td>
+      <td>6</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>Bank/savings and loan</td>
+      <td>20</td>
+      <td>11</td>
+      <td>6</td>
+      <td>1</td>
+      <td>0</td>
+      <td>1</td>
+      <td>1</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>Bar/nightclub</td>
+      <td>96</td>
+      <td>49</td>
+      <td>3</td>
+      <td>43</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>Camp/campground</td>
+      <td>3</td>
+      <td>2</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>Church/synagogue/temple/mosque</td>
+      <td>241</td>
+      <td>36</td>
+      <td>194</td>
+      <td>8</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>Commercial office building</td>
+      <td>117</td>
+      <td>63</td>
+      <td>29</td>
+      <td>20</td>
+      <td>1</td>
+      <td>0</td>
+      <td>3</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>Community center</td>
+      <td>11</td>
+      <td>5</td>
+      <td>4</td>
+      <td>2</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>Construction site</td>
+      <td>19</td>
+      <td>12</td>
+      <td>7</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>Convenience store</td>
+      <td>88</td>
+      <td>57</td>
+      <td>16</td>
+      <td>11</td>
+      <td>0</td>
+      <td>1</td>
+      <td>3</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>Cyberspace</td>
+      <td>4</td>
+      <td>3</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>16</th>
+      <td>Daycare facility</td>
+      <td>2</td>
+      <td>2</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>17</th>
+      <td>Department/discount store</td>
+      <td>72</td>
+      <td>45</td>
+      <td>11</td>
+      <td>13</td>
+      <td>2</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>18</th>
+      <td>Dock/wharf/freight/modal terminal</td>
+      <td>3</td>
+      <td>2</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>19</th>
+      <td>Drug store/doctor's office/hospital</td>
+      <td>64</td>
+      <td>49</td>
+      <td>11</td>
+      <td>2</td>
+      <td>2</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>20</th>
+      <td>Farm facility</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>21</th>
+      <td>Field/woods</td>
+      <td>31</td>
+      <td>19</td>
+      <td>7</td>
+      <td>2</td>
+      <td>0</td>
+      <td>0</td>
+      <td>3</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>22</th>
+      <td>Gambling facility/casino/race track</td>
+      <td>3</td>
+      <td>3</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>23</th>
+      <td>Government/public building</td>
+      <td>111</td>
+      <td>73</td>
+      <td>24</td>
+      <td>10</td>
+      <td>1</td>
+      <td>2</td>
+      <td>0</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>24</th>
+      <td>Grocery/supermarket</td>
+      <td>62</td>
+      <td>46</td>
+      <td>7</td>
+      <td>8</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>25</th>
+      <td>Highway/road/alley/street/sidewalk</td>
+      <td>1128</td>
+      <td>718</td>
+      <td>117</td>
+      <td>241</td>
+      <td>7</td>
+      <td>1</td>
+      <td>35</td>
+      <td>9</td>
+    </tr>
+    <tr>
+      <th>26</th>
+      <td>Hotel/motel/etc.</td>
+      <td>44</td>
+      <td>32</td>
+      <td>3</td>
+      <td>8</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>27</th>
+      <td>Industrial site</td>
+      <td>12</td>
+      <td>10</td>
+      <td>1</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>28</th>
+      <td>Jail/prison/penitentiary/corrections facility</td>
+      <td>61</td>
+      <td>42</td>
+      <td>3</td>
+      <td>13</td>
+      <td>1</td>
+      <td>1</td>
+      <td>0</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>29</th>
+      <td>Lake/waterway/beach</td>
+      <td>6</td>
+      <td>2</td>
+      <td>0</td>
+      <td>4</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>30</th>
+      <td>Liquor store</td>
+      <td>15</td>
+      <td>12</td>
+      <td>2</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>31</th>
+      <td>Military installation</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>32</th>
+      <td>Park/playground</td>
+      <td>98</td>
+      <td>66</td>
+      <td>13</td>
+      <td>12</td>
+      <td>2</td>
+      <td>1</td>
+      <td>2</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>33</th>
+      <td>Parking/drop lot/garage</td>
+      <td>351</td>
+      <td>222</td>
+      <td>50</td>
+      <td>68</td>
+      <td>3</td>
+      <td>0</td>
+      <td>5</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>34</th>
+      <td>Rental storage facility</td>
+      <td>9</td>
+      <td>5</td>
+      <td>3</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>35</th>
+      <td>Residence/home</td>
+      <td>1670</td>
+      <td>1008</td>
+      <td>249</td>
+      <td>327</td>
+      <td>32</td>
+      <td>11</td>
+      <td>24</td>
+      <td>19</td>
+    </tr>
+    <tr>
+      <th>36</th>
+      <td>Rest area</td>
+      <td>4</td>
+      <td>3</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>37</th>
+      <td>Restaurant</td>
+      <td>143</td>
+      <td>92</td>
+      <td>14</td>
+      <td>29</td>
+      <td>3</td>
+      <td>2</td>
+      <td>3</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>38</th>
+      <td>School/college</td>
+      <td>146</td>
+      <td>67</td>
+      <td>52</td>
+      <td>24</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>39</th>
+      <td>college/university</td>
+      <td>210</td>
+      <td>107</td>
+      <td>61</td>
+      <td>36</td>
+      <td>1</td>
+      <td>0</td>
+      <td>5</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>40</th>
+      <td>elementary/secondary school</td>
+      <td>248</td>
+      <td>155</td>
+      <td>48</td>
+      <td>29</td>
+      <td>6</td>
+      <td>1</td>
+      <td>2</td>
+      <td>7</td>
+    </tr>
+    <tr>
+      <th>41</th>
+      <td>Service/gas station</td>
+      <td>72</td>
+      <td>55</td>
+      <td>8</td>
+      <td>6</td>
+      <td>0</td>
+      <td>0</td>
+      <td>3</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>42</th>
+      <td>Shelter: mission/homeless</td>
+      <td>16</td>
+      <td>10</td>
+      <td>2</td>
+      <td>2</td>
+      <td>0</td>
+      <td>0</td>
+      <td>2</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>43</th>
+      <td>Shopping mall</td>
+      <td>8</td>
+      <td>6</td>
+      <td>2</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>44</th>
+      <td>Specialty store (TV, fur, etc.)</td>
+      <td>39</td>
+      <td>28</td>
+      <td>9</td>
+      <td>2</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>45</th>
+      <td>Other/unknown</td>
+      <td>777</td>
+      <td>297</td>
+      <td>301</td>
+      <td>132</td>
+      <td>7</td>
+      <td>8</td>
+      <td>27</td>
+      <td>5</td>
+    </tr>
+    <tr>
+      <th>46</th>
+      <td>Multiple locations</td>
+      <td>4</td>
+      <td>2</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>1</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
 </div>
     </div>
   </div>
