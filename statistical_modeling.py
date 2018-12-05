@@ -1,4 +1,4 @@
-
+#!/usr/bin/env python
 # coding: utf-8
 
 # In[3]:
@@ -36,12 +36,6 @@ model = LinearRegression()
 rfe = RFE(model)
 fit = rfe.fit(x, y)
 
-#print("Num Features: %s" % (fit.n_features_))
-#print("Selected Features: %s" % (fit.support_))
-#print("Feature Ranking: %s" % (fit.ranking_))
-#median_household_income, share_population_in_metro_areas, share_population_with_high_school_degree, share_non_white
-# linear regression: share_unemployed_seasonal, shared_population_with_high_school_degree, share_white_poverty, gini_index
-
 columns = "+".join(['share_unemployed_seasonal', 'share_population_with_high_school_degree', 'share_white_poverty', 'gini_index'])
 
 multi_model = smf.ols('hate_crimes ~' + (columns), data = no_HI).fit()
@@ -55,17 +49,6 @@ no_HI['predictions_using_selected_features'] = multi_model.predict()
 pred_actual_melt = no_HI[['state', 'hate_crimes', 'predictions_using_selected_features']]
 pred_actual_melt = pred_actual_melt.melt('state', var_name='actual_vs_pred', value_name='value')
 
-#alt.Chart(pred_actual_melt).mark_bar(stroke='transparent').encode(
- #   alt.X('actual_vs_pred', scale=alt.Scale(rangeStep=12), axis=alt.Axis(title='')),
-  #  alt.Y('value', axis=alt.Axis(title='population', grid=False)),
-   # color=alt.Color('actual_vs_pred', scale=alt.Scale(range=["#EA98D2", "#659CCA"])),
-    #column = 'state'
-#).configure_view(
- #   stroke='transparent'
-#).configure_axis(
-#    domainWidth=0.8
-#)
-
 selected_features_actual_preds = alt.Chart(pred_actual_melt).mark_bar(opacity = 0.7).encode(
     alt.X('state', scale=alt.Scale(rangeStep=12), axis=alt.Axis(title='State')),
     alt.Y('value', axis=alt.Axis(title='Hate Crimes per 100k People', grid=False), stack = None),
@@ -76,7 +59,7 @@ selected_features_actual_preds = alt.Chart(pred_actual_melt).mark_bar(opacity = 
     domainWidth=0.8
 ).properties (
     title = 'Actual vs Predicted Number of Hate Crimes by State (Selected Features)'
-)
+).interactive();
 selected_features_actual_preds
 
 
@@ -101,7 +84,7 @@ all_features_actual_preds = alt.Chart(pred_actual_melt_all).mark_bar(opacity = 0
     domainWidth=0.8
 ).properties (
     title = 'Actual vs Predicted Number of Hate Crimes by State (All Features)'
-)
+).interactive();
 all_features_actual_preds
 
 
@@ -111,7 +94,6 @@ all_features_actual_preds
 # Compares actual hate crime cases to predicted
 pred_actual_hate_crime = plt.figure()
 plt.scatter(no_HI.hate_crimes, no_HI.predictions_using_all_features)
-#plt.plot(no_HI[hate_crimes', 'multi_preds_all', kind="scatter")
 plt.plot(no_HI.hate_crimes, no_HI.hate_crimes)
 plt.title('Predicted vs. Actual Hate Crimes')
 plt.xlabel('Actual Hate Crimes')
@@ -121,7 +103,7 @@ plt.ylabel('Predicted Hate Crimes');
 # In[9]:
 
 
-# Residual plot
+# Residual plot to assess accuracies
 f, (plot1, plot2) = plt.subplots(1, 2, sharey=True)
 f.set_figwidth(15)
 plot1.scatter(no_HI.hate_crimes, no_HI.hate_crimes - no_HI.predictions_using_all_features)
@@ -134,8 +116,6 @@ plot2.axhline(0, color='red')
 plot2.set_title('Residual Plot of Predictions in Using Selected Features')
 plot2.set_xlabel('Actual Hate Crimes')
 plot2.set_ylabel('Actual - Predicted Hate Crimes');
-
-#predictions_using_selected_features
 
 
 # In[10]:
@@ -164,7 +144,7 @@ actual_preds_by_state = alt.Chart(pred_actual_melt_all).mark_bar(opacity = 0.7).
     domainWidth=0.8
 ).properties (
     title = 'Actual vs Predicted Average Hate Crimes by State from 2010 - 2015'
-)
+).interactive();
 actual_preds_by_state
 
 
@@ -189,4 +169,10 @@ plt.axhline(0, color='red')
 plt.title('Residual Plot of Avg Predictions from 2010 - 2015')
 plt.xlabel('Actual Average Hate Crimes')
 plt.ylabel('Actual - Predicted Hate Crimes');
+
+
+# In[ ]:
+
+
+
 
